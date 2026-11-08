@@ -1,0 +1,14 @@
+{
+  // Cloudflare settings for coachbower.com. Leave this file alone.
+  // On every change pushed to GitHub, Cloudflare runs the build below and publishes the public/ folder.
+  "name": "coachbower",
+  "compatibility_date": "2026-10-01",
+  "build": {
+    "command": "node _build/build.cjs public https://coachbower.com"
+  },
+  "assets": {
+    "directory": "./public",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
