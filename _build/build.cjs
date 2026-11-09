@@ -114,7 +114,7 @@ const STORIES = [
     ['Focussed on finding tolerable movements that didn’t recreate symptoms.', 'Learned ways of self-managing pain when she was on her own.', 'Didn’t miss a session for months on end (this is key).'],
     ['Pam recently told me her pain has improved 90%. She feels confident performing her surgical work without physical limitations, and she’s also dropped 2 dress sizes. Awesome result.'],
     ['Hear it from Pam', 'https://www.instagram.com/reel/DJ6-AqEozjg/']],
-  ['Fady', 'Ten years of ankle pain, stronger into surgery', CDN + '5c9a67db-6b47-4960-a4d3-63aa4b3d2284/IMG_5613.png', 'fady.jpg', 'he',
+  ['Fady', 'Ten years of ankle pain, stronger into surgery', 'https://raw.githubusercontent.com/michaelbower12-glitch/coachbower-site/main/public/img/Fady%20K%20website.jpeg', 'Fady K website.jpeg', 'he',
     ['Fady had been dealing with daily chronic ankle pain for over 10 years. When he’d try to play soccer or go for a jog, he’d pay for it for days afterwards. He told me he was questioning not only his quality of life, but his entire future as an active adult. He booked a reconstructive surgery to get back to what he loves without the constant backdrop of pain.', 'Our goal was simple: prepare him for surgery by making his lower body as strong as possible.'],
     ['Refined basic foot mechanics.', 'Increased strength and stability of the surrounding tissues.', 'Improved tendon function through plyometric training.'],
     ['Fady can load his ankle with a big improvement in pain levels, and he’s going into surgery from a much higher starting point than he would have otherwise. He told me that seeing what his ankle is capable of has made him confident about his recovery after the operation.'],
