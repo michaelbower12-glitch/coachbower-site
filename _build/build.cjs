@@ -66,6 +66,7 @@ const AV = ['ALV-UjVOj1HWeMQcXbIy-e_PI9gwfHg8mhAPsIQhqVRzPrtR7zfXvVc', 'ACg8ocIY
   'ACg8ocKBOm33deIeTsNoj74HxoG3WOGp1u7nz-E_knaSkB3DsWGrfA', 'ACg8ocK9GmymYnVttReHZ8qwbTcxnh4nRT8_gl2CeXeO-YPvzJCNeA'];
 const avUrl = id => (id.startsWith('ALV') ? 'https://lh3.googleusercontent.com/a-/' : 'https://lh3.googleusercontent.com/a/') + id + '=w120-h120-p-rp-mo-br100';
 const REVIEWS = [
+  ['Fady Kamel', 'Coach Bower has truly changed my life. He has a unique approach to training and he customizes the training according to each client. I was scheduled for ankle surgery and he trained me prior to surgery to strengthen my ankle prior to surgery. After the surgery he complemented my physio and has helped me regain back much of my strength and my mobility. He is courteous, motivating and an overall great person. I highly recommend him!!'],
   ['Meghane Phillips', 'I have been training with Michael for a couple months now and I have already seen so much improvement! I am a competitive dancer, so I was looking to improve my fitness to be a better performer. However, I have been dealing with shin splints and knee pain. Michael has been amazing at helping me adapt movements and train the right muscles to strengthen my legs. I haven’t had pain training in the past couple of weeks and have finally been able to return to normal movements, like jumping. I know I owe a lot of that to the exercises I did in training, so thank you!'],
   ['Anna Jva', 'I’ve been training with Michael for nearly a year now. He’s helped me significantly with my chronic pain issues, gotten me stronger, feeling better than ever! But the thing I appreciate the most is the care he puts into making sure that, despite my limitations and fluctuating abilities (suspected hEDS), I am able to train pain-free, there is always an alternative available if I cannot do an exercise due to pain, information on how to manage it, tracking and reminders of how far I’d gotten, and just a very good, kind human that I feel absolutely comfortable training with.'],
   ['Lorne Novolker', 'I have been training with Michael for a few years now and my entire family has joined once a week. The workouts are tailored to each of our fitness levels, are at the right intensity levels for everyone, and have encouraged everyone to prioritise our Thursday nights to training with Coach Bower.'],
@@ -81,7 +82,7 @@ for (const [n, i] of Object.entries(AV_FOR)) avatarPath[n] = img(avUrl(AV[i]), `
 function reviewCard([name, text], r) {
   const long = text.length > 260;
   return `<figure class="review">
-  <header><img src="${r}${avatarPath[name]}" alt="" width="40" height="40" loading="lazy"><div><figcaption>${esc(name)}</figcaption><div class="stars" role="img" aria-label="5 out of 5 stars">${STAR.repeat(5)}</div></div>${GOOGLE}</header>
+  <header>${avatarPath[name] ? `<img src="${r}${avatarPath[name]}" alt="" width="40" height="40" loading="lazy">` : '<span class="review-avatar" aria-hidden="true">FK</span>'}<div><figcaption>${esc(name)}</figcaption><div class="stars" role="img" aria-label="5 out of 5 stars">${STAR.repeat(5)}</div></div>${GOOGLE}</header>
   <blockquote${long ? ' class="clamp"' : ''}>${esc(text)}</blockquote>${long ? '<button class="more" type="button" aria-expanded="false">Read more</button>' : ''}
 </figure>`;
 }
@@ -275,7 +276,8 @@ const home = page({
   <img class="hero-img" src="${HERO}" alt="" fetchpriority="high">
   <div class="wrap hero-inner">
     <h1>Rehab &amp; strength coaching <em>without the fluff</em></h1>
-    <p class="hero-lead">Helping adults who’ve been sidelined by pain get back to the things that make life meaningful.<br>In person in Montreal, or online wherever you are.</p>
+    <p class="hero-lead">Helping adults who’ve been sidelined by pain get back to the things that make life meaningful.</p>
+    <p class="hero-location"><span>${I.pin} In person in Montreal</span><span>${I.arrow} Online wherever you are</span></p>
     <div class="hero-actions">
       <a class="btn btn-lg" href="${FORM}" ${ext}>Get in touch ${I.arrow}</a>
       <a class="btn btn-ghost btn-lg" href="client-stories/">See client stories</a>
@@ -283,7 +285,7 @@ const home = page({
     <ul class="hero-proof">
       <li><span class="stars-inline" role="img" aria-label="5 stars">${STAR.repeat(5)}</span> Five-star Google reviews</li>
       <li>Sport Science &amp; Physiology background</li>
-      <li>Nearly 10 years coaching</li>
+      <li>10 years of coaching experience</li>
     </ul>
   </div>
 </section>
@@ -291,7 +293,7 @@ const home = page({
 <section class="sec gap-sec">
   <div class="wrap">
     <div class="sec-head">
-      <h2>The gap between physio and the gym</h2>
+      <h2>Bridging the gap between physio and the gym</h2>
       <p>Physio is great at getting you out of pain. Trainers are great at building fitness. Too often you get one without the other, and end up stuck in between.</p>
     </div>
     <div class="gap" role="img" aria-label="Physio gets you out of pain, personal training builds fitness, and Coach Bower bridges the gap between them.">
@@ -302,6 +304,13 @@ const home = page({
   </div>
 </section>
 
+<section class="sec philosophy">
+  <div class="wrap philosophy-grid">
+    <div><p class="eyebrow">My coaching philosophy</p><h2>Coach the human first.</h2></div>
+    <div class="philosophy-copy"><p class="big">Start with the whole person. Then dial in.</p><p>I start global: your goals, your day-to-day life, your training history and how your body moves as a whole. I look at the system before zooming in on a specific knee, ankle, shoulder or other local area.</p><p>That bigger picture guides the focused work. Rehab and strength training come together in a plan that fits you and helps you get back to what matters.</p></div>
+  </div>
+</section>
+
 <section class="sec about">
   <div class="wrap about-grid">
     <figure class="about-photo"><img src="${HEADSHOT}" alt="Coach Michael Bower" loading="lazy"${fp(HEADSHOT)}></figure>
@@ -309,7 +318,7 @@ const home = page({
       <h2>Hey! I’m Michael</h2>
       <p class="big">I’m a trainer who specialises in coaching adults who’ve found themselves sidelined from the activities they love because of pain.</p>
       <p>You might be skeptical about working with a trainer. Or maybe those recurring physio appointments help in the short term, but don’t seem to be moving the needle. Totally understandable.</p>
-      <p>With an academic background in Sport Science &amp; Physiology and nearly 10 years of coaching, I combine performance training with injury rehab to get you back to what you love, without the backdrop of pain.</p>
+      <p>With an academic background in Sport Science &amp; Physiology and 10 years of coaching experience, I combine performance training with injury rehab to get you back to what you love, without the backdrop of pain.</p>
       <h3 class="athletes-h">Athletes of life, if you will</h3>
       <ul class="athletes">${ACTIVITIES.map(a => `<li>${a}</li>`).join('')}</ul>
       <p class="sign">Talk soon,<br><strong>Michael</strong></p>
@@ -376,7 +385,7 @@ const home = page({
       <h2>What clients say</h2>
     </div>
     <div class="reviews">
-      ${REVIEWS.slice(0, 3).map(rv => reviewCard(rv, '')).join('\n      ')}
+      ${REVIEWS.map(rv => reviewCard(rv, '')).join('\n      ')}
     </div>
   </div>
 </section>
