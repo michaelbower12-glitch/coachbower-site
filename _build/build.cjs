@@ -300,7 +300,7 @@ const home = page({
         <span class="approach-plus" aria-hidden="true">+</span>
         <div><h3>Strength</h3><p>Build capacity.<br>Train for what matters.</p></div>
       </div>
-      <div class="approach-together"><p class="eyebrow">Our approach</p><h3>Rehab + strength, together.</h3><p>Not separate phases. A plan built around the whole person.</p></div>
+      <div class="approach-together"><p class="eyebrow">Our approach</p><h3>Rehab + strength, together.</h3><p>Not separate phases. A seamless plan built around you.</p></div>
     </div>
   </div>
 </section>
