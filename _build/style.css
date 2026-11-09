@@ -64,7 +64,7 @@ h3 { font-size: 21px; font-weight: 750; line-height: 1.2; letter-spacing: -.01em
 /* header */
 .site-header { position: sticky; top: 0; z-index: 50; background: rgba(19, 19, 19, .92); backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px); color: var(--text-inv); border-bottom: 1px solid rgba(255, 255, 255, .07); }
 .bar { display: flex; align-items: center; justify-content: space-between; min-height: 72px; gap: 24px; }
-.brand img { height: 46px; width: auto; }
+.brand img { height: 70px; width: auto; }
 .nav { display: flex; align-items: center; gap: 6px; }
 .nav > a:not(.btn), .drop-btn { color: var(--text-inv); text-decoration: none; font: 600 15.5px var(--font); padding: 10px 14px; border-radius: 999px; background: none; border: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: background .2s, color .2s; }
 .nav > a:not(.btn):hover, .drop-btn:hover { background: rgba(255, 255, 255, .08); color: #fff; }
