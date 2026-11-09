@@ -192,7 +192,7 @@ ${SITE ? '' : '<meta name="robots" content="noindex, nofollow">'}
         <button type="button" class="drop-btn" aria-expanded="false"${active === 'blog' ? ' data-current' : ''}>Helpful resources ${I.chev}</button>
         <div class="drop-menu">
           <a href="${r}blog/"${cur('blog')}><strong>Blog</strong><span>A new article on training and health every week</span></a>
-          <a href="${GUIDE}" ${ext}><strong>12 Essential Isometrics for Runners</strong><span>Free guide, sent straight to your inbox</span></a>
+          <a hidden href="${GUIDE}" ${ext}><strong>12 Essential Isometrics for Runners</strong><span>Free guide, sent straight to your inbox</span></a>
         </div>
       </div>
       <a class="btn btn-sm" href="${FORM}" ${ext}>Get in touch</a>
@@ -205,9 +205,9 @@ ${body}
 <footer class="site-footer">
   <div class="wrap foot">
     <div class="foot-news">
-      <h2>Get the weekly article</h2>
-      <p>Once a week I sit down with a coffee (and my dog) and write about training and health. Sign up and it lands straight in your inbox, along with my free guide to 12 essential isometrics for runners.</p>
-      <a class="btn" href="${GUIDE}" ${ext}>Subscribe ${I.arrow}</a>
+      <h2>The weekly article</h2>
+      <p>Once a week I sit down with a coffee (and my dog) and write about training and health.</p>
+      <a class="btn" href="${r}blog/">Read the latest articles ${I.arrow}</a>
     </div>
     <div class="foot-cols">
       <div>
@@ -215,7 +215,7 @@ ${body}
         <a href="${r || './'}">Home</a>
         <a href="${r}client-stories/">Client stories</a>
         <a href="${r}blog/">Blog</a>
-        <a href="${GUIDE}" ${ext}>Free isometrics guide</a>
+        <a hidden href="${GUIDE}" ${ext}>Free isometrics guide</a>
       </div>
       <div>
         <h3>Contact</h3>
@@ -491,7 +491,7 @@ const blogIndex = page({
       </ol>
     </div>
     <aside class="blog-aside">
-      <div class="aside-card">
+      <div class="aside-card" hidden>
         ${I.doc}
         <h2>Free guide: 12 essential isometrics for runners</h2>
         <p>Runners need to be damn strong. Here’s where to start. Get the guide and the weekly article in your inbox.</p>
