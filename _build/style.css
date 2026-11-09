@@ -259,6 +259,15 @@ h3 { font-size: 21px; font-weight: 750; line-height: 1.2; letter-spacing: -.01em
 @supports not (interpolate-size: allow-keywords) { .faqs details[open] > div { animation: faq-reveal .35s var(--ease) both; } }
 @keyframes faq-reveal { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
 @media (max-width: 860px) { .faq-grid { grid-template-columns: 1fr; } .faq-grid .sec-head { position: static; } }
+@media (max-width: 640px) {
+  .hero-inner { padding-top: 72px; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+  .hero-location { flex-direction: column; gap: 12px; }
+  .faq-grid { gap: 24px; }
+  .faq-grid .sec-head { margin-bottom: 0; }
+  .faqs details > div { padding-right: 12px; }
+  .review .more { min-height: 44px; padding: 10px 0; }
+}
 
 /* instagram */
 .insta-sec { padding-top: 0; }
