@@ -70,9 +70,7 @@ const REVIEWS = [
   ['Meghane Phillips', 'I have been training with Michael for a couple months now and I have already seen so much improvement! I am a competitive dancer, so I was looking to improve my fitness to be a better performer. However, I have been dealing with shin splints and knee pain. Michael has been amazing at helping me adapt movements and train the right muscles to strengthen my legs. I haven’t had pain training in the past couple of weeks and have finally been able to return to normal movements, like jumping. I know I owe a lot of that to the exercises I did in training, so thank you!'],
   ['Anna Jva', 'I’ve been training with Michael for nearly a year now. He’s helped me significantly with my chronic pain issues, gotten me stronger, feeling better than ever! But the thing I appreciate the most is the care he puts into making sure that, despite my limitations and fluctuating abilities (suspected hEDS), I am able to train pain-free, there is always an alternative available if I cannot do an exercise due to pain, information on how to manage it, tracking and reminders of how far I’d gotten, and just a very good, kind human that I feel absolutely comfortable training with.'],
   ['Lorne Novolker', 'I have been training with Michael for a few years now and my entire family has joined once a week. The workouts are tailored to each of our fitness levels, are at the right intensity levels for everyone, and have encouraged everyone to prioritise our Thursday nights to training with Coach Bower.'],
-  ['Sam Chankowsky', 'Coach Bower is the absolute BEST!!! I’ve been training with him for over a year now and am always SO excited for my training sessions. He tailors the workout to your level of comfort and abilities, but still pushes you to work harder and get stronger! He also knows SO much about fitness, injuries, rehabilitation, anatomy, nutrition, etc. I’m always learning and never feel afraid to ask questions. Workouts are always so fun and chill, and have become one of the best parts of my week no doubt.'],
   ['Mbotenayo', 'Our sessions have strengthened my muscles and improved my stability and hip strength, reducing pain. Michael’s attention and corrections during exercises are invaluable. We’ve worked together for months, and the results are clear. Highly recommend!'],
-  ['Ryan Riback', 'I’ve been working with Coach Bower for a while now, and he’s truly a game-changer. His personalized workouts are always spot-on, and his wealth of knowledge across all things wellness is truly unmatched. He really cares about you as a person, not just as a client, and knows exactly when to push you to reach your full potential. Training in Krav Maga with him was also a blast, and I’ve learned so much. Scheduling sessions is pain free, and I can confidently say Coach Bower is a trainer for life. Highly recommend!'],
 ];
 // avatars listed in the order they appeared on his site: Meghane, Lorne, Anna, Sam, Mbotenayo, Ryan
 const AV_FOR = { 'Meghane Phillips': 0, 'Lorne Novolker': 1, 'Anna Jva': 2, 'Sam Chankowsky': 3, 'Mbotenayo': 4, 'Ryan Riback': 5 };
@@ -296,13 +294,10 @@ const home = page({
       <h2>Bridging the gap between physio and the gym</h2>
       <p>Physio is great at getting you out of pain. Trainers are great at building fitness. Too often you get one without the other, and end up stuck in between.</p>
     </div>
-    <div class="approach-visual" aria-label="Our approach combines rehab and strength throughout your coaching.">
-      <div class="approach-disciplines">
-        <div><h3>Rehab</h3><p>Understand your symptoms.<br>Find tolerable movement.</p></div>
-        <span class="approach-plus" aria-hidden="true">+</span>
-        <div><h3>Strength</h3><p>Build capacity.<br>Train for what matters.</p></div>
-      </div>
-      <div class="approach-together"><p class="eyebrow">Our approach</p><h3>Rehab + strength, together.</h3><p>Not separate phases. A plan built around the whole person.</p></div>
+    <div class="gap" role="img" aria-label="Physio gets you out of pain, personal training builds fitness, and Coach Bower bridges the gap between them.">
+      <div class="gap-end"><h3>Physio</h3><p>Gets you out of pain, but can stop short of rebuilding strength and confidence.</p></div>
+      <div class="gap-mid"><div class="gap-track"><span></span></div><h3>Rehab + strength</h3><p>Rehab principles built into real performance training, so you get out of pain <em>and</em> keep getting stronger.</p></div>
+      <div class="gap-end"><h3>Personal training</h3><p>Builds fitness, but often without the skillset to work with someone in pain.</p></div>
     </div>
   </div>
 </section>
