@@ -296,10 +296,13 @@ const home = page({
       <h2>Bridging the gap between physio and the gym</h2>
       <p>Physio is great at getting you out of pain. Trainers are great at building fitness. Too often you get one without the other, and end up stuck in between.</p>
     </div>
-    <div class="gap" role="img" aria-label="Physio gets you out of pain, personal training builds fitness, and Coach Bower bridges the gap between them.">
-      <div class="gap-end"><h3>Physio</h3><p>Gets you out of pain, but can stop short of rebuilding strength and confidence.</p></div>
-      <div class="gap-mid"><div class="gap-track"><span></span></div><h3>Rehab + strength</h3><p>Rehab principles built into real performance training, so you get out of pain <em>and</em> keep getting stronger.</p></div>
-      <div class="gap-end"><h3>Personal training</h3><p>Builds fitness, but often without the skillset to work with someone in pain.</p></div>
+    <div class="approach-visual" aria-label="Our approach combines rehab and strength throughout your coaching.">
+      <div class="approach-disciplines">
+        <div><h3>Rehab</h3><p>Understand your symptoms.<br>Find tolerable movement.</p></div>
+        <span class="approach-plus" aria-hidden="true">+</span>
+        <div><h3>Strength</h3><p>Build capacity.<br>Train for what matters.</p></div>
+      </div>
+      <div class="approach-together"><p class="eyebrow">Our approach</p><h3>Rehab + strength, together.</h3><p>Not separate phases. A plan built around the whole person.</p></div>
     </div>
   </div>
 </section>
