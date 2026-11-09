@@ -124,7 +124,7 @@ const STORIES = [
     ['Addressed mobility of his shoulder and mid-back, to reduce movement restrictions.', 'Got really strong in a couple of pain-free movements.', 'Learned that pain is a signal, not a sentence!'],
     ['Gino just played 18 holes at the golf club, totally pain-free. He’s also slamming med balls and lifting dumbbells every week. It’s not magic: it’s science, some good coaching, and a whole lotta hard work on his part.'],
     ['Watch Gino’s big win', 'https://www.instagram.com/reel/DLDcdwNRIUN/']],
-].map(s => ({ name: s[0], outcome: s[1], photo: img(s[2], s[3], 1200), slug: s[3].replace('.jpg', ''), pron: s[4], start: s[5], did: s[6], now: s[7], link: s[8] }));
+].map(s => ({ name: s[0], outcome: s[1], photo: img(s[2], s[3], 1200), slug: s[0] === 'Fady' ? 'fady' : s[3].replace('.jpg', ''), pron: s[4], start: s[5], did: s[6], now: s[7], link: s[8] }));
 
 // ---------- blog ----------
 function cleanBody(html) {
