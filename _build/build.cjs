@@ -275,7 +275,7 @@ const home = page({
   <img class="hero-img" src="${HERO}" alt="" fetchpriority="high">
   <div class="wrap hero-inner">
     <h1>Rehab &amp; strength coaching <em>without the fluff</em></h1>
-    <p class="hero-lead">helping adults who’ve been sidelined by pain get back to the things that make life meaningful.<br>In person in Montreal, or online wherever you are.</p>
+    <p class="hero-lead">Helping adults who’ve been sidelined by pain get back to the things that make life meaningful.<br>In person in Montreal, or online wherever you are.</p>
     <div class="hero-actions">
       <a class="btn btn-lg" href="${FORM}" ${ext}>Get in touch ${I.arrow}</a>
       <a class="btn btn-ghost btn-lg" href="client-stories/">See client stories</a>
