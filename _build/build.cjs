@@ -96,6 +96,15 @@ const FAQS = [
   ['What’s the difference between online coaching and the premade programs?', ['Premade programs are structured templates made to suit most people. I’ve spent hours designing them to be not only straightforward to complete, but brutally effective as well. They’re ideal if you want a proven system to follow on your own.', 'Online coaching is a premium coaching service built specifically with you in mind. Your goals, injury history, preferences etc.', 'Put simply: programs give you the map; coaching helps you navigate it.']],
 ];
 
+const STORY_ISSUES = {
+  howard: 'Back surgery',
+  fady: 'Chronic ankle pain',
+  shari: 'Ankle injury & leg pain',
+  richard: 'Recurring sports injuries',
+  'josee-anne': 'Hip & back pain when running',
+  pam: 'Back, neck & shoulder pain',
+  gino: 'Chronic shoulder pain',
+};
 const STORIES = [
   ['Howard', 'From back surgery to pull-ups', CDN + '56538480-c964-4f12-b035-abe6e07e6c8c/Howard+M.jpeg', 'howard.jpg', 'he',
     ['Howard started training with me after he’d undergone back surgery and had stopped strength training entirely as a result. This, plus a previous bad experience with a trainer, left him feeling unfit and fearful of any movements that actually involved his back.'],
@@ -435,7 +444,7 @@ const stories = page({
   <div class="wrap">
     <h1>Client stories</h1>
     <p class="lead">Some of the transformations that remind me why I love what I do.</p>
-    <nav class="jump" aria-label="Stories">${STORIES.map(s => `<a href="#${s.slug}">${esc(s.name)}</a>`).join('')}</nav>
+    <nav class="jump" aria-label="Client stories by main issue">${STORIES.map(s => `<a href="#${s.slug}">${esc(STORY_ISSUES[s.slug])}</a>`).join('')}</nav>
   </div>
 </section>
 ${STORIES.map((s, i) => `
