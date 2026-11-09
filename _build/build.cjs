@@ -66,8 +66,8 @@ const AV = ['ALV-UjVOj1HWeMQcXbIy-e_PI9gwfHg8mhAPsIQhqVRzPrtR7zfXvVc', 'ACg8ocIY
   'ACg8ocKBOm33deIeTsNoj74HxoG3WOGp1u7nz-E_knaSkB3DsWGrfA', 'ACg8ocK9GmymYnVttReHZ8qwbTcxnh4nRT8_gl2CeXeO-YPvzJCNeA'];
 const avUrl = id => (id.startsWith('ALV') ? 'https://lh3.googleusercontent.com/a-/' : 'https://lh3.googleusercontent.com/a/') + id + '=w120-h120-p-rp-mo-br100';
 const REVIEWS = [
-  ["Howard Messias","I’m a 64 year old (now!) guy and have been working out with Coach Michael for about 18 months; the beginning was tough as I had to force myself to get into better shape. As time went on I realized this was an amazing decision I made (or was made for me by my kids!). Mike is great! He is skilled, articulate, knows his stuff and will continue to challenge you. And he’s really funny! I highly recommend Michael as a strength training coach no matter what stage of life you are at; you will feel the difference!"],
-  ["Adam Lewis","I never thought I’d actually look forward to going to the gym, but coach Bower completely changed that. Walking into the gym now feels more like heading to the pub on a Friday night with friends than going to work out - even on a Sunday morning. I genuinely have a great time every session and leave feeling great.\n\nThe results have been incredible. I’ve lost a ton of weight, built muscle, and made huge improvements in my strength, balance, mobility, and overall fitness.\n\nWhat really sets him apart is his knowledge. Coach truly understands how the body works, explains the purpose behind every exercise, and knows exactly how to help you get results.\n\nIt’s rare to find someone who combines that level of expertise with making workouts so enjoyable. I can’t recommend coach Bower highly enough. Five stars doesn’t do him justice."],
+  ['Howard Messias', 'I’m a 64 year old (now!) guy and have been working out with Coach Michael for about 18 months; the beginning was tough as I had to force myself to get into better shape. As time went on I realized this was an amazing decision I made (or was made for me by my kids!). Mike is great! He is skilled, articulate, knows his stuff and will continue to challenge you. And he’s really funny! I highly recommend Michael as a strength training coach no matter what stage of life you are at; you will feel the difference!'],
+  ['Adam Lewis', 'I never thought I’d actually look forward to going to the gym, but coach Bower completely changed that. Walking into the gym now feels more like heading to the pub on a Friday night with friends than going to work out - even on a Sunday morning. I genuinely have a great time every session and leave feeling great.\n\nThe results have been incredible. I’ve lost a ton of weight, built muscle, and made huge improvements in my strength, balance, mobility, and overall fitness.\n\nWhat really sets him apart is his knowledge. Coach truly understands how the body works, explains the purpose behind every exercise, and knows exactly how to help you get results.\n\nIt’s rare to find someone who combines that level of expertise with making workouts so enjoyable. I can’t recommend coach Bower highly enough. Five stars doesn’t do him justice.'],
   ['Fady Kamel', 'Coach Bower has truly changed my life. He has a unique approach to training and he customizes the training according to each client. I was scheduled for ankle surgery and he trained me prior to surgery to strengthen my ankle prior to surgery. After the surgery he complemented my physio and has helped me regain back much of my strength and my mobility. He is courteous, motivating and an overall great person. I highly recommend him!!'],
   ['Meghane Phillips', 'I have been training with Michael for a couple months now and I have already seen so much improvement! I am a competitive dancer, so I was looking to improve my fitness to be a better performer. However, I have been dealing with shin splints and knee pain. Michael has been amazing at helping me adapt movements and train the right muscles to strengthen my legs. I haven’t had pain training in the past couple of weeks and have finally been able to return to normal movements, like jumping. I know I owe a lot of that to the exercises I did in training, so thank you!'],
   ['Anna Jva', 'I’ve been training with Michael for nearly a year now. He’s helped me significantly with my chronic pain issues, gotten me stronger, feeling better than ever! But the thing I appreciate the most is the care he puts into making sure that, despite my limitations and fluctuating abilities (suspected hEDS), I am able to train pain-free, there is always an alternative available if I cannot do an exercise due to pain, information on how to manage it, tracking and reminders of how far I’d gotten, and just a very good, kind human that I feel absolutely comfortable training with.'],
@@ -127,7 +127,12 @@ const STORIES = [
     ['Addressed mobility of his shoulder and mid-back, to reduce movement restrictions.', 'Got really strong in a couple of pain-free movements.', 'Learned that pain is a signal, not a sentence!'],
     ['Gino just played 18 holes at the golf club, totally pain-free. He’s also slamming med balls and lifting dumbbells every week. It’s not magic: it’s science, some good coaching, and a whole lotta hard work on his part.'],
     ['Watch Gino’s big win', 'https://www.instagram.com/reel/DLDcdwNRIUN/']],
-].map(s => ({ name: s[0], outcome: s[1], photo: img(s[2], s[3], 1200), slug: s[0] === 'Fady' ? 'fady' : s[3].replace('.jpg', ''), pron: s[4], start: s[5], did: s[6], now: s[7], link: s[8] }));
+  ['Shari', 'Walking more, feeling better, getting stronger', null, 'shari.jpg', 'she',
+    ['Shari had always enjoyed being active: hiking, walking and cycling. She wouldn’t have called herself the fittest person, but movement was part of her life. Then an ankle injury and leg pain started affecting her walking, bringing it all to a stop.'],
+    ['Built a manageable training plan that met her where she was, then gradually increased how often she trained.', 'Focussed on small wins each week to build momentum.', 'Gave as much attention to the identity shift of becoming active again as to the training itself.'],
+    ['Three months into working together, Shari’s pain is largely gone. She’s feeling better, seeing strength gains every week and walking more.'],
+    ['Hear it from Shari', 'https://www.instagram.com/p/DdRq-Fgx1uv/']],
+].map(s => ({ name: s[0], outcome: s[1], photo: s[2] ? img(s[2], s[3], 1200) : 'img/' + s[3], slug: s[0] === 'Fady' ? 'fady' : s[3].replace('.jpg', ''), pron: s[4], start: s[5], did: s[6], now: s[7], link: s[8] }));
 
 // ---------- blog ----------
 function cleanBody(html) {
@@ -566,6 +571,11 @@ fs.copyFileSync(path.join(__dirname, 'style.css'), path.join(OUT, 'style.css'));
   const dir = path.join(OUT, 'img');
   fs.mkdirSync(dir, { recursive: true });
   const keep = new Set(downloads.map(d => d.name));
+  // Keep supplied client photos in source so clean builds include them too.
+  for (const name of ['shari.jpg']) {
+    keep.add(name);
+    fs.copyFileSync(path.join(__dirname, name), path.join(dir, name));
+  }
   for (const f of fs.readdirSync(dir)) if (!keep.has(f)) fs.rmSync(path.join(dir, f));
   let ok = 0; const bad = [];
   const q = [...downloads];
