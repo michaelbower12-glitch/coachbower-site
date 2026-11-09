@@ -41,7 +41,7 @@ const INSTA = ['1781210367164-EJ343FQI36DEP803BC46', '1781194839987-K70VSI7YN7CW
   .map((id, i) => img(CDN + id + '/image-asset.jpeg', `insta-${i + 1}.jpg`, 750));
 
 const FOCUS = { headshot: '50% 10%', coaching: '50% 62%', howard: '50% 25%', 'josee-anne': '50% 40%', richard: '50% 22%', pam: '50% 18%', fady: '50% 24%', gino: '50% 12%' };
-const fp = p => { const k = p.split('/').pop().replace(/.jpg$/, ''); return FOCUS[k] ? ` style="object-position:${FOCUS[k]}"` : ''; };
+const fp = p => { if (p.endsWith('Fady K website.jpeg')) return ' style="aspect-ratio:3/4;max-height:none;object-position:center"'; const k = p.split('/').pop().replace(/.jpg$/, ''); return FOCUS[k] ? ` style="object-position:${FOCUS[k]}"` : ''; };
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 // ---------- icons (one stroke family, 24 grid, 1.75 stroke) ----------
