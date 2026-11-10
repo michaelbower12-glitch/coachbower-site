@@ -528,7 +528,7 @@ const blogIndex = page({
 <section class="page-hero">
   <div class="wrap">
     <h1>The blog</h1>
-    <p class="lead">Articles on training, pain and health. Written with a coffee, and usually a dog on my feet.</p>
+    <p class="lead">Articles on training, pain and health. Written with a coffee, and usually my dog Luna sat on my feet.</p>
   </div>
 </section>
 <section class="sec blog-sec">

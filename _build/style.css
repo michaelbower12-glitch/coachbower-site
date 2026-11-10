@@ -434,4 +434,4 @@ h3 { font-size: 21px; font-weight: 750; line-height: 1.2; letter-spacing: -.01em
 @media (max-width: 760px) { .insta { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* Preserve the full frame of the three selected training reels. */
-.insta a:nth-child(n + 2):nth-child(-n + 4) img { object-fit: contain; background: var(--ink); }
+.insta a:nth-child(n + 2):nth-child(-n + 4) img { object-fit: cover; object-position: center; background: var(--ink); }
