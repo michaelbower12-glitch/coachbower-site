@@ -425,3 +425,5 @@ h3 { font-size: 21px; font-weight: 750; line-height: 1.2; letter-spacing: -.01em
 .story-tile div { position: relative; grid-row: 2; bottom: auto; display: grid; grid-template-rows: auto 1fr; }
 .story-tile span { min-height: 4.05em; }
 @media (max-width: 760px) { .offers { grid-template-columns: 1fr; } }
+
+.offer-main { border: 1px solid transparent; }
