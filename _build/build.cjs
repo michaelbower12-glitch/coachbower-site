@@ -91,6 +91,7 @@ const AV = ['ALV-UjVOj1HWeMQcXbIy-e_PI9gwfHg8mhAPsIQhqVRzPrtR7zfXvVc', 'ACg8ocIY
   'ACg8ocKBOm33deIeTsNoj74HxoG3WOGp1u7nz-E_knaSkB3DsWGrfA', 'ACg8ocK9GmymYnVttReHZ8qwbTcxnh4nRT8_gl2CeXeO-YPvzJCNeA'];
 const avUrl = id => (id.startsWith('ALV') ? 'https://lh3.googleusercontent.com/a-/' : 'https://lh3.googleusercontent.com/a/') + id + '=w120-h120-p-rp-mo-br100';
 const REVIEWS = [
+  ['Leanne Melnick', 'I’ve been training with Michael for a few months now and have really been enjoying our sessions! After strength training on my own consistently for about a year, I felt I needed more direction, in-person guidance, and help working toward some specific goals.\n\nWe’ve been focusing on building strength in areas where I’ve had ongoing injuries and weaknesses, while also working toward my goal of getting into running. Michael continues to challenge me each session, gradually increasing the weights as I get stronger. I’ve already noticed a big improvement in my strength since starting and look forward to continuing to progress. I highly recommend working with Michael!'],
   ['Howard Messias', 'I’m a 64 year old (now!) guy and have been working out with Coach Michael for about 18 months; the beginning was tough as I had to force myself to get into better shape. As time went on I realized this was an amazing decision I made (or was made for me by my kids!). Mike is great! He is skilled, articulate, knows his stuff and will continue to challenge you. And he’s really funny! I highly recommend Michael as a strength training coach no matter what stage of life you are at; you will feel the difference!'],
   ['Adam Lewis', 'I never thought I’d actually look forward to going to the gym, but coach Bower completely changed that. Walking into the gym now feels more like heading to the pub on a Friday night with friends than going to work out - even on a Sunday morning. I genuinely have a great time every session and leave feeling great.\n\nThe results have been incredible. I’ve lost a ton of weight, built muscle, and made huge improvements in my strength, balance, mobility, and overall fitness.\n\nWhat really sets him apart is his knowledge. Coach truly understands how the body works, explains the purpose behind every exercise, and knows exactly how to help you get results.\n\nIt’s rare to find someone who combines that level of expertise with making workouts so enjoyable. I can’t recommend coach Bower highly enough. Five stars doesn’t do him justice.'],
   ['Fady Kamel', 'Coach Bower has truly changed my life. He has a unique approach to training and he customizes the training according to each client. I was scheduled for ankle surgery and he trained me prior to surgery to strengthen my ankle prior to surgery. After the surgery he complemented my physio and has helped me regain back much of my strength and my mobility. He is courteous, motivating and an overall great person. I highly recommend him!!'],
@@ -349,8 +350,8 @@ const home = page({
   <div class="wrap">
     <div class="sec-head">
       <h2>Bridging the gap between physio and the gym</h2>
-      <p>Strength training and injury rehab aren’t two separate endeavours. They lie on the same spectrum, and your rehab should reflect that: building from movement you can tolerate towards the strength and capacity your life demands.</p>
-      <p>Strength coaching can complement the work you’re doing with your physio or other rehab professionals. I often collaborate on client cases to connect your rehab goals with your training and support well-rounded care.</p>
+      <p>Rehab and strength training lie on the same spectrum: building from movement you can tolerate towards the strength your life demands.</p>
+      <p>I often collaborate with physios and other rehab professionals to connect the work you’re doing in rehab with your training.</p>
     </div>
     <div class="approach-visual" aria-label="Our approach combines rehab and strength throughout your coaching.">
       <div class="approach-disciplines">
@@ -366,7 +367,7 @@ const home = page({
 <section class="sec philosophy">
   <div class="wrap philosophy-grid">
     <div><p class="eyebrow">My coaching philosophy</p><h2>Coach the human first.</h2></div>
-    <div class="philosophy-copy"><p class="big">Start with the whole person. Then dial in.</p><p>I start global: your goals, your day-to-day life, your training history and how your body moves as a whole. I look at the system before zooming in on a specific knee, ankle, shoulder or other local area.</p><p>That bigger picture guides the focused work. Rehab and strength training come together in a plan that fits you and helps you get back to what matters.</p></div>
+    <div class="philosophy-copy"><p class="big">Start with the whole person. Then dial in.</p><p>Your goals, daily life and training history shape how we work together. I look at how your body moves as a whole before focusing on a specific knee, ankle or shoulder. That bigger picture guides the details of your plan.</p></div>
   </div>
 </section>
 
@@ -375,9 +376,9 @@ const home = page({
     <figure class="about-photo"><img src="${HEADSHOT}" alt="Coach Michael Bower" loading="lazy"${fp(HEADSHOT)}></figure>
     <div class="about-copy">
       <h2>Hey! I’m Michael</h2>
-      <p class="big">I’m a trainer who specialises in coaching adults who’ve found themselves sidelined from the activities they love because of pain.</p>
-      <p>You might be unsure how to get back into training, especially if you’re already working with a physio. We can build on that work together, with your goals and your rehab professional’s guidance informing the plan.</p>
-      <p>With an academic background in Sport Science &amp; Physiology and 10 years of coaching experience, I combine performance training with injury rehab to get you back to what you love, without the backdrop of pain.</p>
+      <p class="big">I coach adults who’ve been sidelined by pain to get back to the activities they love.</p>
+      <p>Returning to training can feel uncertain. You don’t need to have it all figured out before we start—we’ll find your starting point together.</p>
+      <p>With an academic background in Sport Science &amp; Physiology and 10 years of coaching experience, I help people build strength for sport and everyday life.</p>
       <h3 class="athletes-h">Athletes of life, if you will</h3>
       <ul class="athletes">${ACTIVITIES.map(a => `<li>${a}</li>`).join('')}</ul>
       <p class="sign">Talk soon,<br><strong>Michael</strong></p>
