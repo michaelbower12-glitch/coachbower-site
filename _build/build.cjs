@@ -353,13 +353,13 @@ const home = page({
       <p>Rehab and strength training lie on the same spectrum: building from movement you can tolerate towards the strength your life demands.</p>
       <p>I often collaborate with physios and other rehab professionals to connect the work you’re doing in rehab with your training.</p>
     </div>
-    <div class="approach-visual" aria-label="Our approach combines rehab and strength throughout your coaching.">
+    <div class="approach-visual" aria-label="My approach combines rehab and strength throughout your coaching.">
       <div class="approach-disciplines">
         <div><h3>Rehab</h3><p>Understand your symptoms.<br>Find tolerable movement.</p></div>
         <span class="approach-plus" aria-hidden="true">+</span>
         <div><h3>Strength</h3><p>Build capacity.<br>Train for what matters.</p></div>
       </div>
-      <div class="approach-together"><p class="eyebrow">Our approach</p><h3>Rehab + strength, together.</h3><p>One spectrum. A progressive plan built around you.</p></div>
+      <div class="approach-together"><p class="eyebrow">My approach</p><h3>Rehab + strength, together.</h3><p>One spectrum. A progressive plan built around you.</p></div>
     </div>
   </div>
 </section>
