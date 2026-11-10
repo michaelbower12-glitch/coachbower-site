@@ -247,7 +247,7 @@ ${body}
   <div class="wrap foot">
     <div class="foot-news">
       <h2>Training &amp; health articles</h2>
-      <p>I sit down with a coffee (and my dog) and write about training and health.</p>
+      <p>Every so often, I sit down with a coffee (and my dog) and write about training and health.</p>
       <a class="btn" href="${r}blog/">Read the latest articles ${I.arrow}</a>
     </div>
     <div class="foot-cols">
