@@ -435,3 +435,10 @@ h3 { font-size: 21px; font-weight: 750; line-height: 1.2; letter-spacing: -.01em
 
 /* Preserve the full frame of the three selected training reels. */
 .insta a:nth-child(n + 2):nth-child(-n + 4) img { object-fit: cover; object-position: center; background: var(--ink); }
+
+/* Give short introductory lines enough room on wider screens. */
+.coaching-section .sec-head, .coaching-section .sec-head h2 + p { max-width: none; }
+@media (min-width: 861px) {
+  .philosophy-grid { grid-template-columns: 1fr 1.4fr; }
+  .philosophy-copy .big { font-size: clamp(20px, 1.7vw, 24px); white-space: nowrap; }
+}

@@ -323,8 +323,9 @@ const home = page({
     </div>
     <ul class="hero-proof">
       <li><span class="stars-inline" role="img" aria-label="5 stars">${STAR.repeat(5)}</span> Five-star Google reviews</li>
-      <li>Sport Science &amp; Physiology background</li>
       <li>10 years of coaching experience</li>
+      <li>Trusted by physios</li>
+      <li>Sport Science &amp; Physiology background</li>
     </ul>
   </div>
 </section>
@@ -396,7 +397,7 @@ const home = page({
   </div>
 </section>
 
-<section class="sec dark">
+<section class="sec dark coaching-section">
   <div class="wrap">
     <div class="sec-head">
       <h2>How I can help you</h2>
