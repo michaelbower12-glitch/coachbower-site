@@ -90,10 +90,9 @@ function reviewCard([name, text], r) {
 
 const FAQS = [
   ['Do I need to be pain-free to start?', ['No. And that’s exactly why this approach exists.', 'Many clients begin while dealing with pain or limitations. We use a structured, progressive system to rebuild strength, resilience and confidence starting from where you are right now.']],
-  ['What makes your approach different from a physio or a typical trainer?', ['Physios tend to be great at getting you out of pain. And trainers tend to be great at building overall fitness.', 'Now this isn’t the rule across the board, but often times, one lacks experience with the other. For example, physios may lack the late-stage performance side of things, and trainers may lack the skillset to competently work with clients in pain.', 'I bridge the gap between the two, integrating rehab principles with performance training.']],
+  ['Can I work with you alongside my physio?', ['Yes. My coaching can complement your physiotherapy or other rehab care. I often collaborate with rehab professionals on shared client cases to help connect the work you’re doing in rehab with your training.', 'With your permission, we can share relevant guidance and progress updates so your plan supports well-rounded care and the activities you want to return to.']],
   ['Do you work with people who aren’t in pain?', ['Yes. Many of my clients approached me either with other goals in mind, or they WERE in pain and no longer are but continue to work with me.', 'They all have one thing in common though: they’re in it for the long run. They view training as an investment in their health, not a quick fix. So if you align with that, we’d probably make a great team!']],
   ['What equipment do I need for online coaching?', ['Whatever you have access to.', 'Your program is designed around your setup. For some of my clients, that’s their local gym. And for many, it’s a home space with just the basics. If you’re missing anything essential, I’ll guide you on simple, affordable ways to fill the gaps.']],
-  ['What’s the difference between online coaching and the premade programs?', ['Premade programs are structured templates made to suit most people. I’ve spent hours designing them to be not only straightforward to complete, but brutally effective as well. They’re ideal if you want a proven system to follow on your own.', 'Online coaching is a premium coaching service built specifically with you in mind. Your goals, injury history, preferences etc.', 'Put simply: programs give you the map; coaching helps you navigate it.']],
 ];
 
 const STORY_ISSUES = {
@@ -212,7 +211,7 @@ ${SITE ? '' : '<meta name="robots" content="noindex, nofollow">'}
           <a hidden href="${GUIDE}" ${ext}><strong>12 Essential Isometrics for Runners</strong><span>Free guide, sent straight to your inbox</span></a>
         </div>
       </div>
-      <a class="btn btn-sm" href="${FORM}" ${ext}>Get in touch</a>
+      <a class="btn btn-sm btn-contact" href="${FORM}" ${ext}>Get in touch</a>
     </nav>
   </div>
 </header>
@@ -294,7 +293,7 @@ const home = page({
     <p class="hero-lead">Helping adults who’ve been sidelined by pain get back to the things that make life meaningful.</p>
     <p class="hero-location"><span>${I.pin} In person in Montreal</span><span>${I.arrow} Online wherever you are</span></p>
     <div class="hero-actions">
-      <a class="btn btn-lg" href="${FORM}" ${ext}>Get in touch ${I.arrow}</a>
+      <a class="btn btn-lg btn-contact" href="${FORM}" ${ext}>Get in touch ${I.arrow}</a>
       <a class="btn btn-ghost btn-lg" href="client-stories/">See client stories</a>
     </div>
     <ul class="hero-proof">
@@ -305,11 +304,26 @@ const home = page({
   </div>
 </section>
 
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head row">
+      <h2>Real people, back to it</h2>
+      <a class="more-link" href="client-stories/">All client stories ${I.arrow}</a>
+    </div>
+    <div class="story-strip">
+      ${STORIES.slice(0, 4).map(s => `<a class="story-tile" href="client-stories/#${s.slug}">
+        <img src="${s.photo}" alt="${esc(s.name)}" loading="lazy"${fp(s.photo)}>
+        <div><strong>${esc(s.name)}</strong><span>${esc(s.outcome)}</span></div>
+      </a>`).join('\n      ')}
+    </div>
+  </div>
+</section>
+
 <section class="sec gap-sec">
   <div class="wrap">
     <div class="sec-head">
       <h2>Bridging the gap between physio and the gym</h2>
-      <p>Physio is great at getting you out of pain. Trainers are great at building fitness. Too often you get one without the other, and end up stuck in between.</p>
+      <p>Strength coaching can complement the work you’re doing with your physio or other rehab professionals. I often collaborate on client cases to connect your rehab goals with your training and support well-rounded care.</p>
     </div>
     <div class="approach-visual" aria-label="Our approach combines rehab and strength throughout your coaching.">
       <div class="approach-disciplines">
@@ -335,12 +349,24 @@ const home = page({
     <div class="about-copy">
       <h2>Hey! I’m Michael</h2>
       <p class="big">I’m a trainer who specialises in coaching adults who’ve found themselves sidelined from the activities they love because of pain.</p>
-      <p>You might be skeptical about working with a trainer. Or maybe those recurring physio appointments help in the short term, but don’t seem to be moving the needle. Totally understandable.</p>
+      <p>You might be unsure how to get back into training, especially if you’re already working with a physio. We can build on that work together, with your goals and your rehab professional’s guidance informing the plan.</p>
       <p>With an academic background in Sport Science &amp; Physiology and 10 years of coaching experience, I combine performance training with injury rehab to get you back to what you love, without the backdrop of pain.</p>
       <h3 class="athletes-h">Athletes of life, if you will</h3>
       <ul class="athletes">${ACTIVITIES.map(a => `<li>${a}</li>`).join('')}</ul>
       <p class="sign">Talk soon,<br><strong>Michael</strong></p>
     </div>
+  </div>
+</section>
+
+<section class="sec tint getting-started" aria-labelledby="getting-started-title">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">From first hello to ongoing progress</p><h2 id="getting-started-title">Getting started</h2><p>We start with where you are today and what you want to get back to.</p></div>
+    <ol class="getting-steps">
+      <li><span class="step-number" aria-hidden="true">01</span><h3>Let’s talk</h3><p>Tell me about your goals, training history and current challenges. We’ll discuss which coaching option fits you.</p></li>
+      <li><span class="step-number" aria-hidden="true">02</span><h3>Find your starting point</h3><p>In person, our first session explores how you move and what you can do comfortably. Online, a discovery call and intake form help shape your starting plan.</p></li>
+      <li><span class="step-number" aria-hidden="true">03</span><h3>Build, review, adjust</h3><p>I build your plan around that starting point. We review your progress and feedback, then adjust the exercises and training demands as you develop.</p></li>
+    </ol>
+    <a class="btn btn-contact" href="${FORM}" ${ext}>Get in touch ${I.arrow}</a>
   </div>
 </section>
 
@@ -355,25 +381,27 @@ const home = page({
         <img src="${COACHING}" alt="Michael coaching a client in the gym" loading="lazy"${fp(COACHING)}>
         <div class="offer-body">
           <h3>In-person coaching <span>Montreal</span></h3>
-          <p>Hands-on coaching in the gym with me. For you if:</p>
+          <p>Hands-on, 60-minute sessions in Montreal, built around your goals and how you’re moving that day.</p>
           <ul class="ticks">
-            <li>${I.check}You want a more hands-on coaching style</li>
-            <li>${I.check}You’re pretty new to strength training</li>
-            <li>${I.check}You value the accountability of having someone in the gym with you</li>
-            <li>${I.check}You can commit to a regular, consistent schedule</li>
+            <li>${I.check}60-minute sessions with individual coaching and technique feedback</li>
+            <li>${I.check}Mobility work to support the movements that matter to you</li>
+            <li>${I.check}Power and strength training adapted to your current ability</li>
+            <li>${I.check}Conditioning to build fitness for sport and everyday life</li>
           </ul>
           <a class="btn" href="${FORM}" ${ext}>Ask about in-person ${I.arrow}</a>
         </div>
       </article>
-      <article class="offer">
+      <article class="offer offer-online">
+        <img src="img/online-coaching.jpg" alt="Michael working on a laptop in the gym" width="1200" height="1599" loading="lazy">
         <div class="offer-body">
           <h3>Online coaching <span>Anywhere</span></h3>
-          <p>A program built around you, your setup and your injury history. For you if:</p>
+          <p>Personal coaching at your own gym or at home, with a plan and ongoing support through the app.</p>
           <ul class="ticks">
-            <li>${I.check}You’d rather train at your own gym or at home</li>
-            <li>${I.check}You want guidance and support to execute on your own</li>
-            <li>${I.check}You’re a keen learner, communicate well and can follow a program</li>
-            <li>${I.check}Your schedule is less flexible, or you’re not near Montreal</li>
+            <li>${I.check}Initial discovery call and intake form to understand your goals and history</li>
+            <li>${I.check}An individual app-based training program</li>
+            <li>${I.check}Daily support through in-app messaging</li>
+            <li>${I.check}Training video review</li>
+            <li>${I.check}Option to book check-in calls</li>
           </ul>
           <a class="btn btn-ghost" href="${FORM}" ${ext}>Ask about online ${I.arrow}</a>
         </div>
@@ -382,20 +410,7 @@ const home = page({
   </div>
 </section>
 
-<section class="sec">
-  <div class="wrap">
-    <div class="sec-head row">
-      <h2>Real people, back to it</h2>
-      <a class="more-link" href="client-stories/">All client stories ${I.arrow}</a>
-    </div>
-    <div class="story-strip">
-      ${STORIES.slice(0, 4).map(s => `<a class="story-tile" href="client-stories/#${s.slug}">
-        <img src="${s.photo}" alt="${esc(s.name)}" loading="lazy"${fp(s.photo)}>
-        <div><strong>${esc(s.name)}</strong><span>${esc(s.outcome)}</span></div>
-      </a>`).join('\n      ')}
-    </div>
-  </div>
-</section>
+
 
 <section class="sec tint">
   <div class="wrap">
@@ -581,7 +596,7 @@ fs.copyFileSync(path.join(__dirname, 'style.css'), path.join(OUT, 'style.css'));
   fs.mkdirSync(dir, { recursive: true });
   const keep = new Set(downloads.map(d => d.name));
   // Keep supplied client photos in source so clean builds include them too.
-  for (const name of ['shari.jpg']) {
+  for (const name of ['shari.jpg', 'online-coaching.jpg']) {
     keep.add(name);
     fs.copyFileSync(path.join(__dirname, name), path.join(dir, name));
   }
