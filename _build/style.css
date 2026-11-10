@@ -413,3 +413,15 @@ h3 { font-size: 21px; font-weight: 750; line-height: 1.2; letter-spacing: -.01em
   .getting-steps { grid-template-columns: 1fr; gap: 36px; }
   .getting-steps li:not(:last-child)::after { content: '↓'; top: auto; bottom: -34px; left: 28px; right: auto; }
 }
+
+/* Matching coaching cards and aligned client names */
+.offers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.offer-main { display: flex; flex-direction: column; }
+.offers .offer > img { display: block; flex: none; width: 100%; height: auto; min-height: 0; max-height: none; aspect-ratio: 4 / 3; object-fit: cover; }
+.offer-main > img { object-position: 50% 55% !important; }
+.offer-online > img { object-position: 50% 45%; }
+.story-strip { align-items: stretch; }
+.story-tile { display: grid; grid-template-rows: 1fr auto; }
+.story-tile div { position: relative; grid-row: 2; bottom: auto; display: grid; grid-template-rows: auto 1fr; }
+.story-tile span { min-height: 4.05em; }
+@media (max-width: 760px) { .offers { grid-template-columns: 1fr; } }

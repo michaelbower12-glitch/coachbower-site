@@ -36,9 +36,39 @@ const LOGO = img(CDN + '6838fbd9-74ac-41ff-ba50-e9b6d3f37fc9/LOGOS+%282%29.png',
 const HERO = img(CDN + 'e2aeec45-a4f2-4252-9e85-6ad2c71480dd/ChatGPT+Image+Dec+1%2C+2025%2C+02_01_34+PM.png', 'hero.jpg', 2500);
 const HEADSHOT = img(CDN + '1edb1d5c-6ccb-4b69-91a5-9a0bfd96abab/coach+bower+headshot.jpg', 'headshot.jpg', 1500);
 const COACHING = img(CDN + '3591a1a2-b71d-4ad0-b1e5-8e2045ff640b/IMG_2679.png', 'coaching.jpg', 1500);
-const INSTA = ['1781210367164-EJ343FQI36DEP803BC46', '1781194839987-K70VSI7YN7CWBASV4A1Q', '1781109806573-75WCBZOJ1BQ7L4PXXG0D',
-  '1781023503315-HES6P68KGWMW98Y1ZV8Y', '1780953717954-WCK2ROSGGDCG6REOT7J5', '1780938565800-21FYQVR745ITHD6D9Z6F']
-  .map((id, i) => img(CDN + id + '/image-asset.jpeg', `insta-${i + 1}.jpg`, 750));
+// Selected by accounts engaged in Instagram Insights, last 90 days (November 9, 2026).
+const INSTA = [
+  {
+    "image": "img/instagram-top-1.jpg",
+    "href": "https://www.instagram.com/p/DcmBqOAEUAX/",
+    "alt": "Featured Instagram carousel"
+  },
+  {
+    "image": "img/instagram-top-2.jpg",
+    "href": "https://www.instagram.com/reel/DeiCXZzBNvh/",
+    "alt": "Featured Instagram training reel"
+  },
+  {
+    "image": "img/instagram-top-3.jpg",
+    "href": "https://www.instagram.com/reel/Dc4NLPesf9j/",
+    "alt": "Featured Instagram training reel"
+  },
+  {
+    "image": "img/instagram-top-4.jpg",
+    "href": "https://www.instagram.com/reel/Dcv5GMSRAh7/",
+    "alt": "Featured Instagram training reel"
+  },
+  {
+    "image": "img/instagram-top-5.jpg",
+    "href": "https://www.instagram.com/reel/DcWzkroOaOy/",
+    "alt": "Featured Instagram training reel"
+  },
+  {
+    "image": "img/instagram-top-6.jpg",
+    "href": "https://www.instagram.com/reel/DdKSlqqPoW-/",
+    "alt": "Featured Instagram training reel"
+  }
+];
 
 const FOCUS = { headshot: '50% 10%', coaching: '50% 62%', howard: '50% 25%', 'josee-anne': '50% 40%', richard: '50% 22%', pam: '50% 18%', fady: '50% 24%', gino: '50% 12%' };
 const fp = p => { if (p.endsWith('Fady K website.jpeg')) return ' style="aspect-ratio:3/4;max-height:none;object-position:center"'; const k = p.split('/').pop().replace(/.jpg$/, ''); return FOCUS[k] ? ` style="object-position:${FOCUS[k]}"` : ''; };
@@ -207,7 +237,7 @@ ${SITE ? '' : '<meta name="robots" content="noindex, nofollow">'}
       <div class="drop">
         <button type="button" class="drop-btn" aria-expanded="false"${active === 'blog' ? ' data-current' : ''}>Helpful resources ${I.chev}</button>
         <div class="drop-menu">
-          <a href="${r}blog/"${cur('blog')}><strong>Blog</strong><span>A new article on training and health every week</span></a>
+          <a href="${r}blog/"${cur('blog')}><strong>Blog</strong><span>Articles on training and health</span></a>
           <a hidden href="${GUIDE}" ${ext}><strong>12 Essential Isometrics for Runners</strong><span>Free guide, sent straight to your inbox</span></a>
         </div>
       </div>
@@ -221,8 +251,8 @@ ${body}
 <footer class="site-footer">
   <div class="wrap foot">
     <div class="foot-news">
-      <h2>The weekly article</h2>
-      <p>Once a week I sit down with a coffee (and my dog) and write about training and health.</p>
+      <h2>Training &amp; health articles</h2>
+      <p>I sit down with a coffee (and my dog) and write about training and health.</p>
       <a class="btn" href="${r}blog/">Read the latest articles ${I.arrow}</a>
     </div>
     <div class="foot-cols">
@@ -308,7 +338,7 @@ const home = page({
   <div class="wrap">
     <div class="sec-head row">
       <h2>Real people, back to it</h2>
-      <a class="more-link" href="client-stories/">All client stories ${I.arrow}</a>
+      <a class="more-link" href="client-stories/">More client stories ${I.arrow}</a>
     </div>
     <div class="story-strip">
       ${STORIES.slice(0, 4).map(s => `<a class="story-tile" href="client-stories/#${s.slug}">
@@ -373,7 +403,7 @@ const home = page({
 <section class="sec dark">
   <div class="wrap">
     <div class="sec-head">
-      <h2>How I can help</h2>
+      <h2>How I can help you</h2>
       <p>Not sure which fits? Just say so when you get in touch and we’ll figure it out together.</p>
     </div>
     <div class="offers">
@@ -442,7 +472,7 @@ const home = page({
       <a class="more-link" href="${IG}" ${ext}>${I.insta}@coachbower_</a>
     </div>
     <div class="insta">
-      ${INSTA.map(p => `<a href="${IG}" ${ext} aria-label="Instagram post on @coachbower_"><img src="${p}" alt="" loading="lazy"${fp(p)}></a>`).join('\n      ')}
+      ${INSTA.map(p => `<a href="${p.href}" ${ext} aria-label="${esc(p.alt)} on @coachbower_"><img src="${p.image}" alt="${esc(p.alt)}" loading="lazy"></a>`).join('\n      ')}
     </div>
   </div>
 </section>
@@ -496,13 +526,13 @@ for (const b of blog) b.dupe = !!b.excerpt && norm(b.body).startsWith(norm(b.exc
 const [lead, ...rest] = blog;
 const blogIndex = page({
   title: 'Blog | Coach Michael Bower',
-  desc: 'Weekly articles on strength training, rehab, pain, running and health from Coach Michael Bower.',
+  desc: 'Articles on strength training, rehab, pain, running and health from Coach Michael Bower.',
   depth: 1, active: 'blog',
   body: `
 <section class="page-hero">
   <div class="wrap">
     <h1>The blog</h1>
-    <p class="lead">One article a week on training, pain and health. Written with a coffee, and usually a dog on my feet.</p>
+    <p class="lead">Articles on training, pain and health. Written with a coffee, and usually a dog on my feet.</p>
   </div>
 </section>
 <section class="sec blog-sec">
@@ -526,7 +556,7 @@ const blogIndex = page({
       <div class="aside-card" hidden>
         ${I.doc}
         <h2>Free guide: 12 essential isometrics for runners</h2>
-        <p>Runners need to be damn strong. Here’s where to start. Get the guide and the weekly article in your inbox.</p>
+        <p>Runners need to be damn strong. Here’s where to start. Get the guide and new articles in your inbox.</p>
         <a class="btn" href="${GUIDE}" ${ext}>Get the free guide</a>
       </div>
       <div class="aside-card plain">
@@ -596,7 +626,7 @@ fs.copyFileSync(path.join(__dirname, 'style.css'), path.join(OUT, 'style.css'));
   fs.mkdirSync(dir, { recursive: true });
   const keep = new Set(downloads.map(d => d.name));
   // Keep supplied client photos in source so clean builds include them too.
-  for (const name of ['shari.jpg', 'online-coaching.jpg']) {
+  for (const name of ['shari.jpg', 'online-coaching.jpg', ...INSTA.map(p => p.image.replace('img/', ''))]) {
     keep.add(name);
     fs.copyFileSync(path.join(__dirname, name), path.join(dir, name));
   }
