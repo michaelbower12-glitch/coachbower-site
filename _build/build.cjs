@@ -36,37 +36,32 @@ const LOGO = img(CDN + '6838fbd9-74ac-41ff-ba50-e9b6d3f37fc9/LOGOS+%282%29.png',
 const HERO = img(CDN + 'e2aeec45-a4f2-4252-9e85-6ad2c71480dd/ChatGPT+Image+Dec+1%2C+2025%2C+02_01_34+PM.png', 'hero.jpg', 2500);
 const HEADSHOT = img(CDN + '1edb1d5c-6ccb-4b69-91a5-9a0bfd96abab/coach+bower+headshot.jpg', 'headshot.jpg', 1500);
 const COACHING = img(CDN + '3591a1a2-b71d-4ad0-b1e5-8e2045ff640b/IMG_2679.png', 'coaching.jpg', 1500);
-// Selected by accounts engaged in Instagram Insights, last 90 days (November 9, 2026).
+// Instagram posts selected by Michael.
 const INSTA = [
+  {
+    "image": "img/instagram-intro.jpg",
+    "href": "https://www.instagram.com/p/DH_auNZR27z/",
+    "alt": "I’m Michael"
+  },
+  {
+    "image": "img/instagram-capacity.png",
+    "href": "https://www.instagram.com/p/DZ3IBsuwvTK/",
+    "alt": "Capacity"
+  },
+  {
+    "image": "img/instagram-myths.png",
+    "href": "https://www.instagram.com/p/DY2z5ojumES/",
+    "alt": "Back pain myths"
+  },
+  {
+    "image": "img/instagram-lbp.png",
+    "href": "https://www.instagram.com/p/DY9_5YFhtoG/",
+    "alt": "Low back pain"
+  },
   {
     "image": "img/instagram-top-1.jpg",
     "href": "https://www.instagram.com/p/DcmBqOAEUAX/",
-    "alt": "Featured Instagram carousel"
-  },
-  {
-    "image": "img/instagram-top-2.jpg",
-    "href": "https://www.instagram.com/reel/DeiCXZzBNvh/",
-    "alt": "Featured Instagram training reel"
-  },
-  {
-    "image": "img/instagram-top-3.jpg",
-    "href": "https://www.instagram.com/reel/Dc4NLPesf9j/",
-    "alt": "Featured Instagram training reel"
-  },
-  {
-    "image": "img/instagram-top-4.jpg",
-    "href": "https://www.instagram.com/reel/Dcv5GMSRAh7/",
-    "alt": "Featured Instagram training reel"
-  },
-  {
-    "image": "img/instagram-top-5.jpg",
-    "href": "https://www.instagram.com/reel/DcWzkroOaOy/",
-    "alt": "Featured Instagram training reel"
-  },
-  {
-    "image": "img/instagram-top-6.jpg",
-    "href": "https://www.instagram.com/reel/DdKSlqqPoW-/",
-    "alt": "Featured Instagram training reel"
+    "alt": "Who I am"
   }
 ];
 
@@ -353,6 +348,7 @@ const home = page({
   <div class="wrap">
     <div class="sec-head">
       <h2>Bridging the gap between physio and the gym</h2>
+      <p>Strength training and injury rehab aren’t two separate endeavours. They lie on the same spectrum, and your rehab should reflect that: building from movement you can tolerate towards the strength and capacity your life demands.</p>
       <p>Strength coaching can complement the work you’re doing with your physio or other rehab professionals. I often collaborate on client cases to connect your rehab goals with your training and support well-rounded care.</p>
     </div>
     <div class="approach-visual" aria-label="Our approach combines rehab and strength throughout your coaching.">
@@ -361,7 +357,7 @@ const home = page({
         <span class="approach-plus" aria-hidden="true">+</span>
         <div><h3>Strength</h3><p>Build capacity.<br>Train for what matters.</p></div>
       </div>
-      <div class="approach-together"><p class="eyebrow">Our approach</p><h3>Rehab + strength, together.</h3><p>Not separate phases. A seamless plan built around you.</p></div>
+      <div class="approach-together"><p class="eyebrow">Our approach</p><h3>Rehab + strength, together.</h3><p>One spectrum. A progressive plan built around you.</p></div>
     </div>
   </div>
 </section>

@@ -427,3 +427,8 @@ h3 { font-size: 21px; font-weight: 750; line-height: 1.2; letter-spacing: -.01em
 @media (max-width: 760px) { .offers { grid-template-columns: 1fr; } }
 
 .offer-main { border: 1px solid transparent; }
+
+/* Five selected Instagram posts */
+.insta { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.insta img { aspect-ratio: 4 / 5; }
+@media (max-width: 760px) { .insta { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
