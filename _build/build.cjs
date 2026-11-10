@@ -44,17 +44,17 @@ const INSTA = [
     "alt": "I’m Michael"
   },
   {
-    "image": "img/instagram-capacity.png",
+    "image": "img/instagram-capacity-cover.jpg",
     "href": "https://www.instagram.com/p/DZ3IBsuwvTK/",
     "alt": "Capacity"
   },
   {
-    "image": "img/instagram-myths.png",
+    "image": "img/instagram-myths-cover.jpg",
     "href": "https://www.instagram.com/p/DY2z5ojumES/",
     "alt": "Back pain myths"
   },
   {
-    "image": "img/instagram-lbp.png",
+    "image": "img/instagram-lbp-cover.jpg",
     "href": "https://www.instagram.com/p/DY9_5YFhtoG/",
     "alt": "Low back pain"
   },
