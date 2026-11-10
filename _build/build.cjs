@@ -377,7 +377,7 @@ const home = page({
     <div class="about-copy">
       <h2>Hey! I’m Michael</h2>
       <p class="big">I coach adults who’ve been sidelined by pain to get back to the activities they love.</p>
-      <p>Returning to training can feel uncertain. You don’t need to have it all figured out before we start—we’ll find your starting point together.</p>
+      <p>Returning to training can feel uncertain. You don’t need to have it all figured out before we start. We’ll find your starting point together.</p>
       <p>With an academic background in Sport Science &amp; Physiology and 10 years of coaching experience, I help people build strength for sport and everyday life.</p>
       <h3 class="athletes-h">Athletes of life, if you will</h3>
       <ul class="athletes">${ACTIVITIES.map(a => `<li>${a}</li>`).join('')}</ul>
