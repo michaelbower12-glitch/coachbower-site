@@ -91,6 +91,8 @@ const AV = ['ALV-UjVOj1HWeMQcXbIy-e_PI9gwfHg8mhAPsIQhqVRzPrtR7zfXvVc', 'ACg8ocIY
   'ACg8ocKBOm33deIeTsNoj74HxoG3WOGp1u7nz-E_knaSkB3DsWGrfA', 'ACg8ocK9GmymYnVttReHZ8qwbTcxnh4nRT8_gl2CeXeO-YPvzJCNeA'];
 const avUrl = id => (id.startsWith('ALV') ? 'https://lh3.googleusercontent.com/a-/' : 'https://lh3.googleusercontent.com/a/') + id + '=w120-h120-p-rp-mo-br100';
 const REVIEWS = [
+  ["Shari R","In six months I’ve made more gains with Michael as my coach than in thirty years before.\n\nI have been in chronic pain most of my life. I tried everything and was about ready to give up on myself. Then I started training with Michael. He intuitively knows what I can handle and how hard to push me. And he teaches as he trains, so I understand what I’m doing, and why. Michael maintains a perfect balance of sensitivity and authority that keeps me reaching new levels.\n\nIf you care about how you age, reach out to Michael."],
+  ["Santiago Pacheco","I had an amazing experience working with Michael! He was always super attentive, insightful and genuinely invested in my progress. I was dealing with an injury and helped me find ways to stay active while being mindful of my limitations, which was really helpful. He would follow up outside of our sessions to check in on how I was feeling post-workout. It really speaks to how much he cares about his clients. Overall, a great experience. Very professional, knowledgeable, and always bringing great energy. Thank you, Michael!"],
   ['Leanne Melnick', 'I’ve been training with Michael for a few months now and have really been enjoying our sessions! After strength training on my own consistently for about a year, I felt I needed more direction, in-person guidance, and help working toward some specific goals.\n\nWe’ve been focusing on building strength in areas where I’ve had ongoing injuries and weaknesses, while also working toward my goal of getting into running. Michael continues to challenge me each session, gradually increasing the weights as I get stronger. I’ve already noticed a big improvement in my strength since starting and look forward to continuing to progress. I highly recommend working with Michael!'],
   ['Howard Messias', 'I’m a 64 year old (now!) guy and have been working out with Coach Michael for about 18 months; the beginning was tough as I had to force myself to get into better shape. As time went on I realized this was an amazing decision I made (or was made for me by my kids!). Mike is great! He is skilled, articulate, knows his stuff and will continue to challenge you. And he’s really funny! I highly recommend Michael as a strength training coach no matter what stage of life you are at; you will feel the difference!'],
   ['Adam Lewis', 'I never thought I’d actually look forward to going to the gym, but coach Bower completely changed that. Walking into the gym now feels more like heading to the pub on a Friday night with friends than going to work out - even on a Sunday morning. I genuinely have a great time every session and leave feeling great.\n\nThe results have been incredible. I’ve lost a ton of weight, built muscle, and made huge improvements in my strength, balance, mobility, and overall fitness.\n\nWhat really sets him apart is his knowledge. Coach truly understands how the body works, explains the purpose behind every exercise, and knows exactly how to help you get results.\n\nIt’s rare to find someone who combines that level of expertise with making workouts so enjoyable. I can’t recommend coach Bower highly enough. Five stars doesn’t do him justice.'],
@@ -378,7 +380,7 @@ const home = page({
       <h2>Hey! I’m Michael</h2>
       <p class="big">I coach adults who’ve been sidelined by pain to get back to the activities they love.</p>
       <p>Returning to training can feel uncertain. You don’t need to have it all figured out before we start. We’ll find your starting point together.</p>
-      <p>With an academic background in Sport Science &amp; Physiology and 10 years of coaching experience, I help people build strength for sport and everyday life.</p>
+      <p>With an academic background in Sport Science &amp; Physiology and 10 years of coaching experience, I help people build strength so they can enjoy everyday life, unhindered.</p>
       <h3 class="athletes-h">Athletes of life, if you will</h3>
       <ul class="athletes">${ACTIVITIES.map(a => `<li>${a}</li>`).join('')}</ul>
       <p class="sign">Talk soon,<br><strong>Michael</strong></p>
@@ -416,7 +418,6 @@ const home = page({
             <li>${I.check}Power and strength training adapted to your current ability</li>
             <li>${I.check}Conditioning to build fitness for sport and everyday life</li>
           </ul>
-          <a class="btn" href="${FORM}" ${ext}>Ask about in-person ${I.arrow}</a>
         </div>
       </article>
       <article class="offer offer-online">
@@ -431,10 +432,10 @@ const home = page({
             <li>${I.check}Training video review</li>
             <li>${I.check}Option to book check-in calls</li>
           </ul>
-          <a class="btn btn-ghost" href="${FORM}" ${ext}>Ask about online ${I.arrow}</a>
         </div>
       </article>
     </div>
+    <div style="text-align:center;margin-top:32px"><a class="btn" href="${FORM}" ${ext}>Ask about coaching options ${I.arrow}</a></div>
   </div>
 </section>
 
