@@ -406,8 +406,9 @@ const home = page({
       <h2>How I can help you</h2>
       <p>Not sure which fits? Just say so when you get in touch and we’ll figure it out together.</p>
     </div>
+    <div class="coaching-options" style="border-radius:var(--radius);overflow:hidden">
     <div class="offers">
-      <article class="offer offer-main">
+      <article class="offer offer-main" style="border-radius:0">
         <img src="${COACHING}" alt="Michael coaching a client in the gym" loading="lazy"${fp(COACHING)}>
         <div class="offer-body">
           <h3>In-person coaching <span>Montreal</span></h3>
@@ -420,7 +421,7 @@ const home = page({
           </ul>
         </div>
       </article>
-      <article class="offer offer-online">
+      <article class="offer offer-online" style="border-radius:0">
         <img src="img/online-coaching.jpg" alt="Michael working on a laptop in the gym" width="1200" height="1599" loading="lazy">
         <div class="offer-body">
           <h3>Online coaching <span>Anywhere</span></h3>
@@ -435,7 +436,8 @@ const home = page({
         </div>
       </article>
     </div>
-    <div style="text-align:center;margin-top:32px"><a class="btn" href="${FORM}" ${ext}>Ask about coaching options ${I.arrow}</a></div>
+    <a class="btn btn-lg" style="display:flex;width:100%;min-height:88px;padding:24px 20px;border-radius:0;font-size:clamp(20px,2.2vw,26px);font-weight:800;text-align:center;justify-content:center;white-space:normal" href="${FORM}" ${ext}>Ask about coaching options ${I.arrow}</a>
+    </div>
   </div>
 </section>
 
