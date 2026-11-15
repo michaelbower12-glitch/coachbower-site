@@ -1,6 +1,4 @@
 {
-  // Cloudflare settings for coachbower.com. Leave this file alone.
-  // On every change pushed to GitHub, Cloudflare runs the build below and publishes the public/ folder.
   "name": "coachbower",
   "compatibility_date": "2026-10-01",
   "build": {
@@ -9,6 +7,28 @@
   "assets": {
     "directory": "./public",
     "html_handling": "auto-trailing-slash",
-    "not_found_handling": "404-page"
+    "not_found_handling": "404-page",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
+  "main": "worker/index.mjs",
+  "d1_databases": [
+    {
+      "binding": "SITE_DB",
+      "database_name": "coachbower-admin",
+      "database_id": "659e7d4d-9df3-4d11-b90d-e34c1eae561a"
+    }
+  ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 0.1,
+    "traces": {
+      "enabled": true,
+      "head_sampling_rate": 0.1
+    }
+  },
+  "vars": {
+    "ACCESS_TEAM_DOMAIN": "",
+    "ACCESS_AUD": ""
   }
 }

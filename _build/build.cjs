@@ -610,7 +610,24 @@ const portal = page({title: 'Inside coaching | Client portal · Coach Michael Bo
 
 // ---------- write ----------
 fs.rmSync(path.join(OUT, 'blog'), { recursive: true, force: true });
-const w = (rel, s) => { const f = path.join(OUT, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, s); };
+const cmsCatalog = [];
+const { createHash } = require('node:crypto');
+const w = (rel, s) => {
+  if (rel.endsWith('index.html')) {
+    const pagePath = '/' + rel.replace(/index\.html$/, '');
+    const blocks = [], seen = new Map();
+    s = s.replace(/(<main[^>]*>)([\s\S]*?)(<\/main>)/, (_, start, main, end) => start + main.replace(/<(h[1-3]|p)(\s[^>]*)?>([\s\S]*?)<\/\1>/gi, (all, tag, attrs = '', html) => {
+      if (/<[^>]+>/.test(html.replace(/<\/?(?:strong|em|b|i|u)\s*>|<br\s*\/?>/gi, '')) || html.length > 6000 || !html.trim()) return all;
+      const hash = createHash('sha256').update(tag + ':' + html).digest('hex').slice(0, 16);
+      const n = seen.get(hash) || 0; seen.set(hash,n+1);
+      const key = hash + '-' + n;
+      blocks.push({key, tag, html});
+      return '<' + tag + attrs + ' data-edit-key="' + key + '">' + html + '</' + tag + '>';
+    }) + end);
+    cmsCatalog.push({path:pagePath, title: (s.match(/<title>(.*?)<\/title>/)||[])[1] || pagePath, blocks});
+  }
+  const f = path.join(OUT, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, s);
+};
 w('index.html', home);
 w('client-portal/index.html', portal);
 if (SITE) {
@@ -629,6 +646,7 @@ if (SITE) {
 w('client-stories/index.html', stories);
 w('blog/index.html', blogIndex);
 for (const [slug, html] of postPages) w(`blog/${slug}/index.html`, html);
+w('_cms/catalog.json', JSON.stringify(cmsCatalog));
 fs.copyFileSync(path.join(__dirname, 'style.css'), path.join(OUT, 'style.css'));
 
 (async () => {
