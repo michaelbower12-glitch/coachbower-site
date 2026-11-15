@@ -18,6 +18,8 @@ test('signed Access identity is verified and only named administrators are autho
  const env={ACCESS_TEAM_DOMAIN:'test.cloudflareaccess.com',ACCESS_AUD:'test-aud',ASSETS:{fetch:async()=>new Response('private admin')}};
  async function token(email,aud='test-aud',exp='5m'){return new SignJWT({email}).setProtectedHeader({alg:'RS256',kid:'test'}).setIssuer('https://test.cloudflareaccess.com').setAudience(aud).setIssuedAt().setExpirationTime(exp).sign(privateKey)}
  for(const [email,aud,exp,status] of [['hello@coachbower.com','test-aud','5m',200],['stranger@example.com','test-aud','5m',403],['hello@coachbower.com','wrong-aud','5m',403],['hello@coachbower.com','test-aud','-1m',403]]){const res=await worker.fetch(new Request('https://coachbower.com/admin/',{headers:{'Cf-Access-Jwt-Assertion':await token(email,aud,exp)}}),env,{});assert.equal(res.status,status);}
+ const cookieRes=await worker.fetch(new Request('https://coachbower.com/admin/',{headers:{Cookie:'CF_Authorization='+await token('hello@coachbower.com')}}),env,{});assert.equal(cookieRes.status,200);
+ const forgedCookie=await worker.fetch(new Request('https://coachbower.com/admin/',{headers:{Cookie:'CF_Authorization=forged'}}),env,{});assert.equal(forgedCookie.status,403);
  const post=await worker.fetch(new Request('https://coachbower.com/admin/api/content',{method:'POST',headers:{'Cf-Access-Jwt-Assertion':await token('hello@coachbower.com'),'Origin':'https://evil.example','Content-Type':'application/json'},body:'{}'}),env,{});assert.equal(post.status,403);
 });
 test('analytics rejects cross-origin writes, hidden paths and privacy requests',async()=>{
