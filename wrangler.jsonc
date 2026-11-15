@@ -28,7 +28,7 @@
     }
   },
   "vars": {
-    "ACCESS_TEAM_DOMAIN": "",
-    "ACCESS_AUD": ""
+    "ACCESS_TEAM_DOMAIN": "coachbower-admin.cloudflareaccess.com",
+    "ACCESS_AUD": "470fe950167e30bc35fcf17f2196e8bc4b2646c3d9633988568eb76add339a80"
   }
 }
