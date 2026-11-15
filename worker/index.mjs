@@ -3,7 +3,7 @@ import { ADMIN_EMAILS, sanitizeHTML, safePage, metricKinds, metricSource } from 
 const json=(v,status=200)=>Response.json(v,{status,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
 async function identity(request, env) {
   if (!env.ACCESS_AUD || !env.ACCESS_TEAM_DOMAIN) return null;
-  const token=request.headers.get('Cf-Access-Jwt-Assertion'); if(!token) return null;
+  const token=request.headers.get('Cf-Access-Jwt-Assertion') || request.headers.get('Cookie')?.split(';').map(s=>s.trim()).find(s=>s.startsWith('CF_Authorization='))?.slice('CF_Authorization='.length); if(!token) return null;
   try { const issuer='https://'+env.ACCESS_TEAM_DOMAIN; const {payload}=await jwtVerify(token,createRemoteJWKSet(new URL(issuer+'/cdn-cgi/access/certs')),{issuer,audience:env.ACCESS_AUD,algorithms:['RS256']}); return ADMIN_EMAILS.includes(payload.email?.toLowerCase()) ? payload.email.toLowerCase() : null; } catch { return null; }
 }
 async function catalog(request,env) { const res=await env.ASSETS.fetch(new Request(new URL('/_cms/catalog.json',request.url))); if(!res.ok) throw new Error('Page catalogue unavailable.'); return res.json(); }
