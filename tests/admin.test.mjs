@@ -27,3 +27,15 @@ test('analytics rejects cross-origin writes, hidden paths and privacy requests',
  const cases=[{origin:'https://evil.example',data:{page:'/',kinds:['pageview']},status:403},{origin:'https://coachbower.com',data:{page:'/admin/',kinds:['pageview']},status:400},{origin:'https://coachbower.com',data:{page:'/',kinds:['unknown']},status:400},{origin:'https://coachbower.com',data:{page:'/',kinds:['pageview']},headers:{DNT:'1'},status:204}];
  for(const c of cases){const res=await worker.fetch(new Request('https://coachbower.com/_site/collect',{method:'POST',headers:{Origin:c.origin,'Content-Type':'application/json',...c.headers},body:JSON.stringify(c.data)}),env,{});assert.equal(res.status,c.status)}assert.equal(touched,false);
 });
+test('client portal validates a separate signed audience and never grants admin access',async t=>{
+ const {publicKey,privateKey}=await generateKeyPair('RS256'),jwk=await exportJWK(publicKey);jwk.kid='client-test';jwk.alg='RS256';const previous=globalThis.fetch;globalThis.fetch=async()=>Response.json({keys:[jwk]});t.after(()=>globalThis.fetch=previous);
+ const env={ACCESS_TEAM_DOMAIN:'client-test.cloudflareaccess.com',ACCESS_AUD:'admin-aud',CLIENT_ACCESS_AUD:'client-aud',ASSETS:{fetch:async()=>new Response('Client onboarding contents',{headers:{'Content-Type':'text/html'}})}};
+ async function token(aud){return new SignJWT({email:'hello@coachbower.com'}).setProtectedHeader({alg:'RS256',kid:'client-test'}).setIssuer('https://client-test.cloudflareaccess.com').setAudience(aud).setIssuedAt().setExpirationTime('5m').sign(privateKey)}
+ for(const path of ['/portal/','/portal/index.html','/%70ortal/']){const denied=await worker.fetch(new Request('https://coachbower.com'+path),env,{});assert.equal(denied.status,403);assert.ok(!(await denied.text()).includes('Client onboarding contents'));}
+ const adminToken=await token('admin-aud'),clientToken=await token('client-aud');
+ const cross=await worker.fetch(new Request('https://coachbower.com/portal/',{headers:{'Cf-Access-Jwt-Assertion':adminToken}}),env,{});assert.equal(cross.status,403);
+ const approved=await worker.fetch(new Request('https://coachbower.com/portal/',{headers:{'Cf-Access-Jwt-Assertion':clientToken}}),env,{});assert.equal(approved.status,200);assert.equal(approved.headers.get('Cache-Control'),'private, no-store');assert.equal(await approved.text(),'Client onboarding contents');
+ const cookie=await worker.fetch(new Request('https://coachbower.com/portal/',{headers:{Cookie:'CF_Authorization='+clientToken}}),env,{});assert.equal(cookie.status,200);
+ const escalation=await worker.fetch(new Request('https://coachbower.com/admin/',{headers:{'Cf-Access-Jwt-Assertion':clientToken}}),env,{});assert.equal(escalation.status,403);
+ const noConfig=await worker.fetch(new Request('https://coachbower.com/portal/'),{},{});assert.equal(noConfig.status,403);
+});

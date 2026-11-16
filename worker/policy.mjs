@@ -9,7 +9,7 @@ export function sanitizeHTML(input) {
   // Decode-free output: encoded markup stays text in the browser.
   return value;
 }
-export function safePage(path) { return typeof path==='string' && /^\/(?:[a-z0-9-]+\/)*$/.test(path) && path.length<180 && !path.startsWith('/admin/'); }
+export function safePage(path) { return typeof path==='string' && /^\/(?:[a-z0-9-]+\/)*$/.test(path) && path.length<180 && !path.startsWith('/admin/') && !path.startsWith('/portal/'); }
 export const metricKinds = ['pageview','session','enquiry_click','portal_click','email_click','instagram_click','newsletter_click'];
 export function metricSource(referrer, ownHost) {
   if(!referrer) return 'Direct / unknown';

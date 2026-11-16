@@ -6,6 +6,12 @@ async function identity(request, env) {
   const token=request.headers.get('Cf-Access-Jwt-Assertion') || request.headers.get('Cookie')?.split(';').map(s=>s.trim()).find(s=>s.startsWith('CF_Authorization='))?.slice('CF_Authorization='.length); if(!token) return null;
   try { const issuer='https://'+env.ACCESS_TEAM_DOMAIN; const {payload}=await jwtVerify(token,createRemoteJWKSet(new URL(issuer+'/cdn-cgi/access/certs')),{issuer,audience:env.ACCESS_AUD,algorithms:['RS256']}); return ADMIN_EMAILS.includes(payload.email?.toLowerCase()) ? payload.email.toLowerCase() : null; } catch { return null; }
 }
+async function clientIdentity(request, env) {
+  if (!env.CLIENT_ACCESS_AUD || !env.ACCESS_TEAM_DOMAIN) return null;
+  const token=request.headers.get('Cf-Access-Jwt-Assertion') || request.headers.get('Cookie')?.split(';').map(s=>s.trim()).find(s=>s.startsWith('CF_Authorization='))?.slice('CF_Authorization='.length);
+  if(!token) return null;
+  try {const issuer='https://'+env.ACCESS_TEAM_DOMAIN;const {payload}=await jwtVerify(token,createRemoteJWKSet(new URL(issuer+'/cdn-cgi/access/certs')),{issuer,audience:env.CLIENT_ACCESS_AUD,algorithms:['RS256']});return typeof payload.email==='string' ? payload.email : null;}catch{return null;}
+}
 async function catalog(request,env) { const res=await env.ASSETS.fetch(new Request(new URL('/_cms/catalog.json',request.url))); if(!res.ok) throw new Error('Page catalogue unavailable.'); return res.json(); }
 function denied(env) { return new Response(`<!doctype html><html lang="en"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Coach Bower · Admin access</title><style>body{background:#f4f4f2;color:#161617;font:17px/1.6 system-ui;max-width:550px;margin:12vh auto;padding:25px}h1{line-height:1.1}a{color:#cc0066}</style><h1>Admin access is protected.</h1><p>${env.ACCESS_AUD?'Sign in through the authorised admin login to continue.':'The editor and dashboard are installed. Secure email-code sign-in is awaiting activation.'}</p><p>This area is reserved for Coach Bower. No editing or analytics data is available without authentication.</p><a href="/">Return to the website</a></html>`,{status:403,headers:{'Content-Type':'text/html;charset=utf-8','Cache-Control':'no-store','X-Robots-Tag':'noindex, nofollow'}}); }
 async function api(request,env,email,url) {
@@ -54,6 +60,12 @@ export default {
   async fetch(request,env,ctx) {
     const url=new URL(request.url); let path; try {path=decodeURIComponent(url.pathname).replace(/\\/g,'/');} catch {return new Response('Invalid path',{status:400});}
     try {
+      if(path==='/portal' || path.startsWith('/portal/')) {
+        const client=await clientIdentity(request,env);
+        if(!client) return new Response('Please sign in through the client login page.',{status:403,headers:{'Cache-Control':'no-store','X-Robots-Tag':'noindex, nofollow'}});
+        if(path==='/portal') return Response.redirect(url.origin+'/portal/',302);
+        const asset=await env.ASSETS.fetch(request);const res=new Response(asset.body,asset);res.headers.set('Cache-Control','private, no-store');res.headers.set('X-Robots-Tag','noindex, nofollow');res.headers.set('X-Frame-Options','DENY');res.headers.set('Referrer-Policy','strict-origin-when-cross-origin');return res;
+      }
       if(path.startsWith('/_cms/')) return new Response('Not found',{status:404});
       if(path==='/admin') return Response.redirect(url.origin+'/admin/',302);
       if(path.startsWith('/admin/')) {
