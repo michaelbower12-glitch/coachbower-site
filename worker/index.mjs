@@ -1,3 +1,4 @@
+import { notificationStatus, processNotifications } from './notifications.mjs';
 import { jwtVerify, createRemoteJWKSet } from 'jose';
 import { memberFor, memberRequest, manageMembers } from './membership.mjs';
 import { ADMIN_EMAILS, sanitizeHTML, safePage, metricKinds, metricSource } from './policy.mjs';
@@ -17,6 +18,7 @@ async function catalog(request,env) { const res=await env.ASSETS.fetch(new Reque
 function denied(env) { return new Response(`<!doctype html><html lang="en"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Coach Bower · Admin access</title><style>body{background:#f4f4f2;color:#161617;font:17px/1.6 system-ui;max-width:550px;margin:12vh auto;padding:25px}h1{line-height:1.1}a{color:#cc0066}</style><h1>Admin access is protected.</h1><p>${env.ACCESS_AUD?'Sign in through the authorised admin login to continue.':'The editor and dashboard are installed. Secure email-code sign-in is awaiting activation.'}</p><p>This area is reserved for Coach Bower. No editing or analytics data is available without authentication.</p><a href="/">Return to the website</a></html>`,{status:403,headers:{'Content-Type':'text/html;charset=utf-8','Cache-Control':'no-store','X-Robots-Tag':'noindex, nofollow'}}); }
 async function api(request,env,email,url) {
   if(request.method!=='GET' && (request.headers.get('Origin')!==url.origin || !request.headers.get('Content-Type')?.startsWith('application/json'))) return json({error:'Request origin rejected.'},403);
+  if(url.pathname==='/admin/api/notifications' && request.method==='GET')return json(await notificationStatus(env));
   if(url.pathname==='/admin/api/members') return manageMembers(request,env,email,url);
   if(url.pathname==='/admin/api/site' && request.method==='GET') {
     const [pages, changes]=await Promise.all([catalog(request,env),env.SITE_DB.prepare('SELECT page,block_key,html,revision,updated_at FROM content_blocks').all()]);
@@ -59,6 +61,7 @@ async function collect(request,env,url) {
   await env.SITE_DB.batch(statements);return new Response(null,{status:204,headers:{'Cache-Control':'no-store'}});
 }
 export default {
+  async scheduled(event,env,ctx) {ctx.waitUntil(processNotifications(env));},
   async fetch(request,env,ctx) {
     const url=new URL(request.url); let path; try {path=decodeURIComponent(url.pathname).replace(/\\/g,'/').replace(/\/+/g,'/');if(/%[0-9a-f]{2}/i.test(path))return new Response('Invalid path',{status:400});} catch {return new Response('Invalid path',{status:400});}
     try {
@@ -66,7 +69,7 @@ export default {
         const client=await clientIdentity(request,env);
         if(!client) return new Response('Please sign in through the client login page.',{status:403,headers:{'Cache-Control':'no-store','X-Robots-Tag':'noindex, nofollow'}});
         url.pathname=path;
-        if(path==='/portal/api/membership') return memberRequest(request,env,client,url);
+        if(path==='/portal/api/membership') return memberRequest(request,env,client,url,ctx);
         const membership=await memberFor(env,client);
         const requestPage=path==='/portal/request-access' || path==='/portal/request-access/' || path==='/portal/request-access/index.html';
         if(requestPage && membership?.status==='approved')return Response.redirect(url.origin+'/portal/',302);

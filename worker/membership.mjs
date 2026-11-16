@@ -1,7 +1,8 @@
+import { processNotifications } from './notifications.mjs';
 import { ADMIN_EMAILS } from './policy.mjs';
 const json=(value,status=200)=>Response.json(value,{status,headers:{'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff'}});
 export async function memberFor(env,email) {return env.SITE_DB.prepare('SELECT id,email,name,status,requested_at,updated_at FROM portal_members WHERE email=?').bind(email.toLowerCase()).first();}
-export async function memberRequest(request,env,email,url) {
+export async function memberRequest(request,env,email,url,ctx) {
   const verifiedEmail=email.toLowerCase();
   if(request.method==='GET') {const member=await memberFor(env,verifiedEmail);return json({email:verifiedEmail,name:member?.name||'',status:member?.status||'unregistered'});}
   if(request.method!=='POST')return json({error:'Method not allowed.'},405);
@@ -11,7 +12,12 @@ export async function memberRequest(request,env,email,url) {
   const name=typeof data.name==='string'?data.name.trim().replace(/\s+/g,' '):'';
   if(!name||name.length>100||/[<>\x00-\x1f]/.test(name))return json({error:'Please enter your name (up to 100 characters).'},400);
   const now=new Date().toISOString();
-  await env.SITE_DB.prepare("INSERT OR IGNORE INTO portal_members(id,email,name,status,requested_at,updated_at) VALUES (?,?,?,'pending',?,?)").bind(crypto.randomUUID(),verifiedEmail,name,now,now).run();
+  const memberId=crypto.randomUUID();
+  const created=await env.SITE_DB.batch([
+    env.SITE_DB.prepare("INSERT OR IGNORE INTO portal_members(id,email,name,status,requested_at,updated_at) VALUES (?,?,?,'pending',?,?)").bind(memberId,verifiedEmail,name,now,now),
+    env.SITE_DB.prepare("INSERT OR IGNORE INTO request_alerts(id,member_id,channel,created_at,next_attempt) SELECT id||':email',id,'email',?,? FROM portal_members WHERE id=? UNION ALL SELECT id||':sms',id,'sms',?,? FROM portal_members WHERE id=?").bind(now,now,memberId,now,now,memberId)
+  ]);
+  if(created[0].meta.changes&&ctx?.waitUntil)ctx.waitUntil(processNotifications(env).catch(()=>console.error(JSON.stringify({event:'request_notification_failed'}))));
   const member=await memberFor(env,verifiedEmail);
   return json({email:verifiedEmail,name:member.name,status:member.status});
 }

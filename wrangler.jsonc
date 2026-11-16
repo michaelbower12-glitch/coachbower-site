@@ -31,5 +31,10 @@
     "ACCESS_TEAM_DOMAIN": "coachbower-admin.cloudflareaccess.com",
     "ACCESS_AUD": "470fe950167e30bc35fcf17f2196e8bc4b2646c3d9633988568eb76add339a80",
     "CLIENT_ACCESS_AUD": "00322ee84e368bfc1348c81165e0e22f6d30647b3ae0da86ae62a3e48866202b"
+  },
+  "triggers": {
+    "crons": [
+      "*/5 * * * *"
+    ]
   }
 }

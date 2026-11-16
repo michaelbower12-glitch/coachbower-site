@@ -14,9 +14,9 @@ test('verified self-signup requires approval; duplicate, forged, CSRF and role e
  const request=(path,jwt,body,origin='https://coachbower.com')=>worker.fetch(new Request('https://coachbower.com'+path,{method:body?'POST':'GET',headers:{'Cf-Access-Jwt-Assertion':jwt,Origin:origin,'Content-Type':'application/json'},...(body?{body:JSON.stringify(body)}:{})}),env,{});
  assert.equal((await request('/portal/',client)).status,302);assert.equal((await request('/portal/request-access/',client)).status,200);
  assert.equal((await request('/portal/api/membership',client,{name:'New Client'},'https://evil.example')).status,403);
- let res=await request('/portal/api/membership',client,{name:'New Client',email:'hello@coachbower.com',status:'approved'});assert.equal(res.status,200);let data=await res.json();assert.equal(data.email,'new@example.com');assert.equal(data.status,'pending');
+ let res=await request('/portal/api/membership',client,{name:'New Client',email:'hello@coachbower.com',status:'approved'});assert.equal(res.status,200);let data=await res.json();assert.equal(data.email,'new@example.com');assert.equal(data.status,'pending');assert.equal((await db.prepare('SELECT COUNT(*) n FROM request_alerts').first()).n,2);
  await request('/portal/api/membership',client,{name:'Duplicate'});assert.equal((await db.prepare("SELECT COUNT(*) n FROM portal_members WHERE email='new@example.com'").first()).n,1);
- assert.equal((await request('/admin/api/members',client)).status,403);assert.equal((await request('/portal/index.html',client)).status,302);
+ assert.equal((await db.prepare('SELECT COUNT(*) n FROM request_alerts').first()).n,2);assert.equal((await request('/admin/api/members',client)).status,403);assert.equal((await request('/portal/index.html',client)).status,302);
  const members=await (await request('/admin/api/members',admin)).json(),member=members.members.find(x=>x.email==='new@example.com');assert.equal(members.inviteUrl,'https://coachbower.com/join/');
  res=await request('/admin/api/members',admin,{id:member.id,status:'approved',previous:'pending'});assert.equal(res.status,200);assert.equal((await request('/portal/',client)).status,200);assert.equal((await request('/portal/api/membership',client)).status,200);
  assert.equal((await request('/admin/api/members',admin,{id:member.id,status:'approved',previous:'pending'})).status,409);
