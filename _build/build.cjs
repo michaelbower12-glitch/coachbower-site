@@ -117,10 +117,10 @@ function reviewCard([name, text], r) {
 }
 
 const FAQS = [
-  ['Do I need to be pain-free to start?', ['No. And that’s exactly why this approach exists.', 'Many clients begin while dealing with pain or limitations. We use a structured, progressive system to rebuild strength, resilience and confidence starting from where you are right now.']],
-  ['Can I work with you alongside my physio?', ['Yes. My coaching can complement your physiotherapy or other rehab care. I often collaborate with rehab professionals on shared client cases to help connect the work you’re doing in rehab with your training.', 'With your permission, we can share relevant guidance and progress updates so your plan supports well-rounded care and the activities you want to return to.']],
+  ['Do I need to be pain-free to start?', ['No, many of my clients start while they’re still dealing with pain.', 'We find exercises you can manage, then increase the difficulty as you’re ready. I adjust the plan based on how you’re getting on.']],
+  ['Can I work with you alongside my physio?', ['Yes. My coaching can complement your physiotherapy or other rehab care. I often collaborate with rehab professionals on shared client cases to help connect the work you’re doing in rehab with your training.', 'With your permission, I can speak with your physio and share progress updates so we’re working towards the same goals.']],
   ['Do you work with people who aren’t in pain?', ['Yes. Many of my clients approached me either with other goals in mind, or they WERE in pain and no longer are but continue to work with me.', 'They all have one thing in common though: they’re in it for the long run. They view training as an investment in their health, not a quick fix. So if you align with that, we’d probably make a great team!']],
-  ['What equipment do I need for online coaching?', ['Whatever you have access to.', 'Your program is designed around your setup. For some of my clients, that’s their local gym. And for many, it’s a home space with just the basics. If you’re missing anything essential, I’ll guide you on simple, affordable ways to fill the gaps.']],
+  ['What equipment do I need for online coaching?', ['I can build your program around the equipment you have at home or at your gym.', 'Your program is designed around your setup. For some of my clients, that’s their local gym. And for many, it’s a home space with just the basics. If you’re missing anything essential, I’ll guide you on simple, affordable ways to fill the gaps.']],
 ];
 
 const STORY_ISSUES = {
@@ -353,16 +353,16 @@ const home = page({
   <div class="wrap">
     <div class="sec-head">
       <h2>Bridging the gap between physio and the gym</h2>
-      <p>Rehab and strength training lie on the same spectrum: building from movement you can tolerate towards the strength your life demands.</p>
+      <p>Rehab and strength training overlap. We start with exercises you can manage and build towards the activities you want to get back to.</p>
       <p>I often collaborate with physios and other rehab professionals to connect the work you’re doing in rehab with your training.</p>
     </div>
     <div class="approach-visual" aria-label="My approach combines rehab and strength throughout your coaching.">
       <div class="approach-disciplines">
-        <div><h3>Rehab</h3><p>Understand your symptoms.<br>Find tolerable movement.</p></div>
+        <div><h3>Rehab</h3><p>Understand what’s bothering you and find movements you can manage.</p></div>
         <span class="approach-plus" aria-hidden="true">+</span>
         <div><h3>Strength</h3><p>Build capacity.<br>Train for what matters.</p></div>
       </div>
-      <div class="approach-together"><p class="eyebrow">My approach</p><h3>Rehab + strength, together.</h3><p>One spectrum. A progressive plan built around you.</p></div>
+      <div class="approach-together"><p class="eyebrow">My approach</p><h3>Rehab + strength, together.</h3><p>Your plan combines rehab and strength training, with exercises that get harder as you improve.</p></div>
     </div>
   </div>
 </section>
@@ -380,8 +380,8 @@ const home = page({
     <div class="about-copy">
       <h2>Hey! I’m Michael</h2>
       <p class="big">I coach adults who’ve been sidelined by pain to get back to the activities they love.</p>
-      <p>Returning to training can feel uncertain. You don’t need to have it all figured out before we start. We’ll find your starting point together.</p>
-      <p>With an academic background in Sport Science &amp; Physiology and 10 years of coaching experience, I help people build strength so they can enjoy everyday life, unhindered.</p>
+      <p>If you’re unsure what you can do or worried about making things worse, we can work through that in our first session or call.</p>
+      <p>I studied Sport Science &amp; Physiology and have coached for 10 years, helping people get stronger and return to the activities they enjoy.</p>
       <h3 class="athletes-h">Athletes of life, if you will</h3>
       <ul class="athletes">${ACTIVITIES.map(a => `<li>${a}</li>`).join('')}</ul>
       <p class="sign">Talk soon,<br><strong>Michael</strong></p>
@@ -391,11 +391,11 @@ const home = page({
 
 <section class="sec tint getting-started" aria-labelledby="getting-started-title">
   <div class="wrap">
-    <div class="sec-head"><p class="eyebrow">From first hello to ongoing progress</p><h2 id="getting-started-title">Getting started</h2><p>We start with where you are today and what you want to get back to.</p></div>
+    <div class="sec-head"><p class="eyebrow">What happens when you get in touch</p><h2 id="getting-started-title">Getting started</h2><p>We start with where you are today and what you want to get back to.</p></div>
     <ol class="getting-steps">
       <li><span class="step-number" aria-hidden="true">01</span><h3>Let’s talk</h3><p>Tell me about your goals, training history and current challenges. We’ll discuss which coaching option fits you.</p></li>
       <li><span class="step-number" aria-hidden="true">02</span><h3>Find your starting point</h3><p>In person, our first session explores how you move and what you can do comfortably. Online, a discovery call and intake form help shape your starting plan.</p></li>
-      <li><span class="step-number" aria-hidden="true">03</span><h3>Build, review, adjust</h3><p>I build your plan around that starting point. We review your progress and feedback, then adjust the exercises and training demands as you develop.</p></li>
+      <li><span class="step-number" aria-hidden="true">03</span><h3>Keep your training moving forward</h3><p>I build your plan around that starting point. We review your progress and feedback, then adjust the exercises and training demands as you develop.</p></li>
     </ol>
     <a class="btn btn-contact" href="${FORM}" ${ext}>Get in touch ${I.arrow}</a>
   </div>
@@ -405,7 +405,7 @@ const home = page({
   <div class="wrap">
     <div class="sec-head">
       <h2>How I can help you</h2>
-      <p>Not sure which fits? Just say so when you get in touch and we’ll figure it out together.</p>
+      <p>If you’re unsure which option would suit you, tell me a bit about your situation when you get in touch.</p>
     </div>
     <div class="coaching-options" style="border-radius:var(--radius);overflow:hidden">
     <div class="offers">
@@ -562,7 +562,7 @@ const blogIndex = page({
         <a class="btn" href="${GUIDE}" ${ext}>Get the free guide</a>
       </div>
       <div class="aside-card plain">
-        <h2>Dealing with pain right now?</h2>
+        <h2>Help with your training</h2>
         <p>Articles help. A plan built around you helps more.</p>
         <a class="more-link" href="${FORM}" ${ext}>Get in touch ${I.arrow}</a>
       </div>
@@ -605,8 +605,8 @@ const portal = page({title: 'Inside coaching | Client portal · Coach Michael Bo
 <style>.portal-intro{padding:72px 0 64px;background:var(--ink);color:white}.portal-kicker{color:var(--pink);font-size:13px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:22px}.portal-intro h1{max-width:850px;font-size:clamp(52px,7vw,84px)}.portal-intro h1 em{display:block;font-style:normal;color:var(--pink)}.portal-intro .lead{color:#c6c6cb;margin:25px 0;max-width:44ch}.portal-actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap}.portal-actions span{font-size:13px;color:#b4b4ba}.portal-layout{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center}.portal-layout h2{font-size:clamp(38px,4vw,56px);margin-bottom:22px}.portal-preview{background:white;border:1px solid var(--line);border-radius:14px;padding:30px;box-shadow:var(--shadow)}.portal-preview small{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink-strong);font-weight:700}.portal-preview h3{margin:15px 0 24px;font-size:26px}.portal-step{display:flex;gap:15px;padding:20px 0;border-top:1px solid var(--line)}.portal-step .tick{color:var(--pink-strong);flex:none;font-weight:700}.portal-step strong{display:block;font-size:16px}.portal-step p{font-size:14px;color:var(--text-2);margin:4px 0 0}.portal-footnote{color:var(--text-2);font-size:12px;margin:20px 0 0}.portal-future{font-size:12px;color:var(--pink-strong);font-weight:600}@media(max-width:760px){.portal-layout{grid-template-columns:1fr;gap:32px}.portal-intro{padding:50px 0}.portal-preview{padding:24px}}
 .portal-intro{padding:45px 0}.portal-intro h1{font-size:clamp(40px,5vw,60px);max-width:780px}.portal-intro .lead{font-size:17px;max-width:50ch;margin:20px 0}.portal-layout{gap:45px}.portal-layout h2{font-size:clamp(32px,3.5vw,45px)}.portal-preview{padding:25px}.portal-step{padding:16px 0}.portal-kicker{margin-bottom:15px}.portal-intro+.sec{padding-top:45px;padding-bottom:45px}@media(max-width:760px){.portal-intro{padding:35px 0}.portal-intro h1{font-size:43px}.portal-intro .lead{font-size:16px}}
 </style>
-<section class="portal-intro"><div class="wrap"><p class="portal-kicker">The client experience</p><h1>Good coaching.<em>From the very first step.</em></h1><p class="lead">A clear place to begin. A coach who gets to know you. A plan built around the life you want to get back to.</p><div class="portal-actions"><a class="btn" href="/client-login/">Enter client portal ${I.arrow}</a><span>For invited clients · sign-in required</span></div></div></section>
-<section class="sec"><div class="wrap portal-layout"><div><p class="portal-kicker" style="color:var(--pink-strong)">A look inside</p><h2>You bring your story.<br>I’ll help with the next chapter.</h2><p class="lead">Working together starts with understanding you: your goals, your training history, and what matters beyond the gym.</p><p>A little direction, a bit of encouragement, and space to see what you’re capable of.</p><a class="more-link" href="${FORM}" ${ext}>Curious about working together? Let’s talk ${I.arrow}</a></div><div class="portal-preview" aria-label="The Coach Bower client experience"><small>For the next chapter</small><h3>A space to move forward.</h3><p style="color:var(--text-2);font-size:17px;line-height:1.7;margin:0 0 24px">Thoughtful coaching. Clear direction. A personal approach to what comes next.</p><p class="portal-footnote">Some things are better experienced. Client access is by invitation.</p></div></div></section>
+<section class="portal-intro"><div class="wrap"><p class="portal-kicker">The client experience</p><h1>Your client portal</h1><p class="lead">Sign in to access your coaching portal. If you haven’t been given access yet, you can request it from the login page.</p><div class="portal-actions"><a class="btn" href="/client-login/">Enter client portal ${I.arrow}</a><span>For invited clients · sign-in required</span></div></div></section>
+<section class="sec"><div class="wrap portal-layout"><div><p class="portal-kicker" style="color:var(--pink-strong)">A look inside</p><h2>What to expect from coaching</h2><p class="lead">We’ll talk about your goals, training history and any pain you’re dealing with, then work out how to fit training into your week.</p><a class="more-link" href="${FORM}" ${ext}>Curious about working together? Let’s talk ${I.arrow}</a></div><div class="portal-preview" aria-label="The Coach Bower client experience"><small>For existing clients</small><h3>Access your coaching portal</h3><p style="color:var(--text-2);font-size:17px;line-height:1.7;margin:0 0 24px">Sign in using the email address you were invited with.</p><p class="portal-footnote">If you need access, you can submit a request from the login page.</p></div></div></section>
 `});
 
 // ---------- write ----------
