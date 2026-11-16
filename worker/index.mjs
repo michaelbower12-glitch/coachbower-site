@@ -60,7 +60,7 @@ async function collect(request,env,url) {
 }
 export default {
   async fetch(request,env,ctx) {
-    const url=new URL(request.url); let path; try {path=decodeURIComponent(url.pathname).replace(/\\/g,'/');} catch {return new Response('Invalid path',{status:400});}
+    const url=new URL(request.url); let path; try {path=decodeURIComponent(url.pathname).replace(/\\/g,'/').replace(/\/+/g,'/');if(/%[0-9a-f]{2}/i.test(path))return new Response('Invalid path',{status:400});} catch {return new Response('Invalid path',{status:400});}
     try {
       if(path==='/portal' || path.startsWith('/portal/')) {
         const client=await clientIdentity(request,env);
