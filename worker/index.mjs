@@ -1,4 +1,5 @@
 import { jwtVerify, createRemoteJWKSet } from 'jose';
+import { memberFor, memberRequest, manageMembers } from './membership.mjs';
 import { ADMIN_EMAILS, sanitizeHTML, safePage, metricKinds, metricSource } from './policy.mjs';
 const json=(v,status=200)=>Response.json(v,{status,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
 async function identity(request, env) {
@@ -16,6 +17,7 @@ async function catalog(request,env) { const res=await env.ASSETS.fetch(new Reque
 function denied(env) { return new Response(`<!doctype html><html lang="en"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Coach Bower · Admin access</title><style>body{background:#f4f4f2;color:#161617;font:17px/1.6 system-ui;max-width:550px;margin:12vh auto;padding:25px}h1{line-height:1.1}a{color:#cc0066}</style><h1>Admin access is protected.</h1><p>${env.ACCESS_AUD?'Sign in through the authorised admin login to continue.':'The editor and dashboard are installed. Secure email-code sign-in is awaiting activation.'}</p><p>This area is reserved for Coach Bower. No editing or analytics data is available without authentication.</p><a href="/">Return to the website</a></html>`,{status:403,headers:{'Content-Type':'text/html;charset=utf-8','Cache-Control':'no-store','X-Robots-Tag':'noindex, nofollow'}}); }
 async function api(request,env,email,url) {
   if(request.method!=='GET' && (request.headers.get('Origin')!==url.origin || !request.headers.get('Content-Type')?.startsWith('application/json'))) return json({error:'Request origin rejected.'},403);
+  if(url.pathname==='/admin/api/members') return manageMembers(request,env,email,url);
   if(url.pathname==='/admin/api/site' && request.method==='GET') {
     const [pages, changes]=await Promise.all([catalog(request,env),env.SITE_DB.prepare('SELECT page,block_key,html,revision,updated_at FROM content_blocks').all()]);
     return json({email,pages,changes:changes.results});
@@ -63,6 +65,12 @@ export default {
       if(path==='/portal' || path.startsWith('/portal/')) {
         const client=await clientIdentity(request,env);
         if(!client) return new Response('Please sign in through the client login page.',{status:403,headers:{'Cache-Control':'no-store','X-Robots-Tag':'noindex, nofollow'}});
+        url.pathname=path;
+        if(path==='/portal/api/membership') return memberRequest(request,env,client,url);
+        const membership=await memberFor(env,client);
+        const requestPage=path==='/portal/request-access' || path==='/portal/request-access/' || path==='/portal/request-access/index.html';
+        if(requestPage && membership?.status==='approved')return Response.redirect(url.origin+'/portal/',302);
+        if(!requestPage && membership?.status!=='approved')return Response.redirect(url.origin+'/portal/request-access/',302);
         if(path==='/portal') return Response.redirect(url.origin+'/portal/',302);
         const asset=await env.ASSETS.fetch(request);const res=new Response(asset.body,asset);res.headers.set('Cache-Control','private, no-store');res.headers.set('X-Robots-Tag','noindex, nofollow');res.headers.set('X-Frame-Options','DENY');res.headers.set('Referrer-Policy','strict-origin-when-cross-origin');return res;
       }

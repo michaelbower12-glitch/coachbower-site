@@ -29,7 +29,7 @@ test('analytics rejects cross-origin writes, hidden paths and privacy requests',
 });
 test('client portal validates a separate signed audience and never grants admin access',async t=>{
  const {publicKey,privateKey}=await generateKeyPair('RS256'),jwk=await exportJWK(publicKey);jwk.kid='client-test';jwk.alg='RS256';const previous=globalThis.fetch;globalThis.fetch=async()=>Response.json({keys:[jwk]});t.after(()=>globalThis.fetch=previous);
- const env={ACCESS_TEAM_DOMAIN:'client-test.cloudflareaccess.com',ACCESS_AUD:'admin-aud',CLIENT_ACCESS_AUD:'client-aud',ASSETS:{fetch:async()=>new Response('Client onboarding contents',{headers:{'Content-Type':'text/html'}})}};
+ const env={ACCESS_TEAM_DOMAIN:'client-test.cloudflareaccess.com',ACCESS_AUD:'admin-aud',CLIENT_ACCESS_AUD:'client-aud',SITE_DB:{prepare(){return {bind(){return {first:async()=>({status:'approved'})}}}}},ASSETS:{fetch:async()=>new Response('Client onboarding contents',{headers:{'Content-Type':'text/html'}})}};
  async function token(aud){return new SignJWT({email:'hello@coachbower.com'}).setProtectedHeader({alg:'RS256',kid:'client-test'}).setIssuer('https://client-test.cloudflareaccess.com').setAudience(aud).setIssuedAt().setExpirationTime('5m').sign(privateKey)}
  for(const path of ['/portal/','/portal/index.html','/%70ortal/']){const denied=await worker.fetch(new Request('https://coachbower.com'+path),env,{});assert.equal(denied.status,403);assert.ok(!(await denied.text()).includes('Client onboarding contents'));}
  const adminToken=await token('admin-aud'),clientToken=await token('client-aud');
